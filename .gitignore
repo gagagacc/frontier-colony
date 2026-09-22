@@ -1,11 +1,36 @@
-# 依赖与构建产物
+# ============================================================
+#  《开拓者：殖民地》—— **HTML / Electron 版**仓库
+# ============================================================
+#
+# Godot 4.4 版已经**独立成另一个项目**：
+#   https://github.com/gagagacc/frontier-colony-godot
+# 所以本仓库不再追踪 godot/ 与 Godot 专用工具（**本地文件照旧保留**，
+# 方便在同一个工作目录里同时开发两版）。
+#
+# 为什么这么严：项目自带打包链，产物动辄几百 MB（绿色版 279 MB /
+# Godot 导出 95 MB / 引擎二进制 250 MB），而且都能从源码重新生成。
+# GitHub 单文件上限 100 MB，塞进去既推不动也没意义 —— 发布走 Releases。
+
+# ---------- 另一个仓库的东西（Godot 版）----------
+godot/
+tools/godot-golden.mjs        # 跨语言黄金对比 —— 归 Godot 仓库
+tools/godot-verify.mjs
+tools/godot-shot.mjs
+tools/godot-export.mjs
+tools/fetch-godotsteam.mjs
+tools/assertion-matrix.mjs
+# 注意：tools/export-godot-data.mjs **留在这里** —— 它从本仓库的 src/ 生成
+#       Godot 侧的数据表，属于两边的桥梁。
+
+# ---------- 分仓整理时的临时目录 ----------
+godot-repo/
+dist-release/
+
+# ---------- 依赖与构建产物 ----------
 node_modules/
 dist/
 out/
 steam_build_output/
-
-# Godot 侧：导出产物与引擎二进制（都能从源码重新生成）
-# —— 引擎动辄 250 MB、导出包 95 MB，GitHub 单文件上限 100 MB，推上去也没意义
 dist-godot/
 tools/godot-dl/exe/
 tools/godot-dl/*.zip
@@ -18,15 +43,6 @@ tools/rcedit-x64.exe
 godot/.godot/
 *.import.bak
 
-# 验证日志（每次跑都会重新生成）
-tools/verify-out*.txt
-
-# 素材源包：CC0 可重下，登记在 assets/manifest.json 与 ASSETS.md 里
-# （真正被游戏使用的贴图已经拷进 godot/assets/，那部分照常提交）
-assets-src/
-assets/_x_*/
-assets/_dl_*.zip
-
 # Steam 开发调试文件（绝对不能进包）
 steam_appid.txt
 steam/app_build_*.vdf
@@ -34,8 +50,12 @@ steam/depot_build_*.vdf
 
 # 本地生成的截图与基准输出
 tools/shots/
+tools/verify-out*.txt
 
-# 下载的素材包（体积大；只提交挑出来并登记进 manifest 的那几张）
+# 下载的素材包（体积大；真正用到的那几张已登记进 manifest）
+assets-src/
+assets/_x_*/
+assets/_dl_*.zip
 assets/_packs/
 assets/fonts/
 
@@ -43,7 +63,10 @@ assets/fonts/
 *.bak
 *.tmp
 *.log
+tools/_*.mjs
 
 # 编辑器
 .vscode/
 .idea/
+.DS_Store
+Thumbs.db

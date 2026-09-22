@@ -26,7 +26,9 @@ node tools/assertion-matrix.mjs # 断言分组重建率
 
 ---
 
-> ⚠️ **Godot 4.4 移植已完成（`godot/` 目录）。**
+> ⚠️ **Godot 4.4 版已经独立成另一个项目：[`frontier-colony-godot`](https://github.com/gagagacc/frontier-colony-godot)。**
+> 本仓库只保留 **HTML / Electron 版**；Godot 版的可下载绿色版在
+> [它的 Releases](https://github.com/gagagacc/frontier-colony-godot/releases) 里（解压双击即玩）。
 > 下面这一套 JS 版**已冻结但保持可运行**，绿色版照旧可发布；新功能只在 Godot 版里做。
 > 移植计划、阶段进度与验收方式见 **[`godot/PORT-PLAN.md`](godot/PORT-PLAN.md)**，
 > 验收命令 `node tools/godot-verify.mjs`（跨语言逐位对比，当前 **228 条全绿**）。
