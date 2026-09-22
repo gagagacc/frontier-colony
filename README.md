@@ -1,6 +1,32 @@
 # 开拓者：殖民地（Colony Frontier）
 
-> ⚠️ **本仓库正在往 Godot 4.4 移植（`godot/` 目录）。**
+**▶ 在线试玩（HTML 版）：https://gagagacc.github.io/frontier-colony/**
+
+> 纯静态、无需安装 —— 打开就是 JS/Canvas 原版。
+> 桌面绿色版与 Godot 4.4 移植版见 [`godot/PORT-PLAN.md`](godot/PORT-PLAN.md)（产物不进仓库，走 Releases）。
+
+## 两种版本
+
+| 版本 | 位置 | 说明 |
+|---|---|---|
+| **HTML / 浏览器** | 根目录 `index.html` + `src/` | 原版，也是上面在线试玩跑的那一份；桌面版用 Electron（`electron/`） |
+| **Godot 4.4 移植** | `godot/` | GDScript 重写，数据统一读 `godot/data/*.json`；与 JS 版**跨语言逐位一致**（黄金对比） |
+
+## 验证
+
+```bash
+node tools/verify.mjs           # JS 侧全部套件（333 条）
+node tools/verify.mjs --all     # 再带上浏览器端与核心循环（需要 Electron）
+node tools/godot-verify.mjs     # Godot 黄金对比（5964 条）+ 120 秒长时模拟
+node tools/assertion-matrix.mjs # 断言分组重建率
+```
+
+> ⚠️ **本仓库不做「大文件托管」**：构建产物（绿色版 zip、Godot 导出 exe）、
+> 引擎二进制与素材源包都在 `.gitignore` 里 —— 都能从源码重新生成。
+
+---
+
+> ⚠️ **Godot 4.4 移植已完成（`godot/` 目录）。**
 > 下面这一套 JS 版**已冻结但保持可运行**，绿色版照旧可发布；新功能只在 Godot 版里做。
 > 移植计划、阶段进度与验收方式见 **[`godot/PORT-PLAN.md`](godot/PORT-PLAN.md)**，
 > 验收命令 `node tools/godot-verify.mjs`（跨语言逐位对比，当前 **228 条全绿**）。
