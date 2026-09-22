@@ -23,9 +23,10 @@ import { readFileSync, existsSync, statSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { requireToken } from './gh-token.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || '';
+const TOKEN = requireToken();
 const arg = (n, d) => { const i = process.argv.indexOf('--' + n); return i >= 0 && process.argv[i + 1] ? process.argv[i + 1] : d; };
 const REPO = arg('repo', 'frontier-colony');
 const BRANCH = 'main';

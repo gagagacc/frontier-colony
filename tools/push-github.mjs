@@ -17,9 +17,10 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, statSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { requireToken } from './gh-token.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || '';
+const TOKEN = requireToken();
 const arg = (name, dflt) => {
   const i = process.argv.indexOf('--' + name);
   return i >= 0 && process.argv[i + 1] ? process.argv[i + 1] : dflt;
@@ -28,11 +29,6 @@ const REPO = arg('repo', 'frontier-colony');
 const PRIVATE = process.argv.includes('--private');
 const BRANCH = 'main';
 
-if (!TOKEN) {
-  console.error('❌ 没有 GH_TOKEN。用法：');
-  console.error('   $env:GH_TOKEN = "ghp_xxx"; node tools/push-github.mjs');
-  process.exit(2);
-}
 
 const git = (args, opts = {}) =>
   execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: opts.quiet ? 'pipe' : 'inherit', ...opts });

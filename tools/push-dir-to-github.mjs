@@ -17,10 +17,11 @@
 import { readFileSync, existsSync, statSync, readdirSync } from 'node:fs';
 import { join, dirname, relative, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { requireToken } from './gh-token.mjs';
 import { createReadStream } from 'node:fs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const TOKEN = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || '';
+const TOKEN = requireToken();
 const arg = (n, d) => { const i = process.argv.indexOf('--' + n); return i >= 0 && process.argv[i + 1] ? process.argv[i + 1] : d; };
 const DIR = join(ROOT, arg('dir', ''));
 const REPO = arg('repo', '');
