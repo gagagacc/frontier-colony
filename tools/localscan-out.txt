@@ -1,0 +1,92 @@
+﻿
+⚠ src/core/assets.js
+   load
+      39: async load() {
+
+⚠ src/core/game.js
+   screenToCanvas
+      196: static screenToCanvas(canvas, clientX, clientY) {
+
+⚠ src/core/gamepad.js
+   s
+      525: return this.name.split( )[0].split( )[0].replace(/\s*\(.*?\)\s*/g,  ).trim();
+      525: return this.name.split( )[0].split( )[0].replace(/\s*\(.*?\)\s*/g,  ).trim();
+
+⚠ src/core/save.js
+   _syncFromDisk
+      42: async _syncFromDisk() {
+
+⚠ src/core/steamClient.js
+   refreshStatus
+      46: async refreshStatus() {
+
+⚠ src/main.js
+   No
+      610: if (/No handler registered|save:|steam:/.test(msg)) {
+
+⚠ src/render/renderer.js
+   bold
+      2267: ctx.font =  big ? 'bold 12px' : '11px'  ;
+
+⚠ src/systems/player.js
+   lo
+      688: for (const [, [lo, hi]] of Object.entries(def.yield || {})) total += (lo + hi) /
+      688: for (const [, [lo, hi]] of Object.entries(def.yield || {})) total += (lo + hi) /
+
+⚠ src/systems/towers.js
+   RT
+      560: notice( ,  best.def.name  wantPad ? 'RT / X 射击，R3 交还' : '左键射击，C 交还'  ,  );
+   X
+      560: notice( ,  best.def.name  wantPad ? 'RT / X 射击，R3 交还' : '左键射击，C 交还'  ,  );
+   R3
+      560: notice( ,  best.def.name  wantPad ? 'RT / X 射击，R3 交还' : '左键射击，C 交还'  ,  );
+   C
+      560: notice( ,  best.def.name  wantPad ? 'RT / X 射击，R3 交还' : '左键射击，C 交还'  ,  );
+
+⚠ src/ui/panelBuild.js
+   tower
+      19: button( , () => { state.tab =  ; refresh(); },  state.tab === 'tower' ? ' primar
+   base
+      22: button( , () => { state.tab =  ; refresh(); },  state.tab === 'base' ? ' primary
+   good
+      146: h( , { class:   },  ), h( , { class:  b.online ? 'good' : 'bad'   }, b.online ? 
+   bad
+      146: h( , { class:   },  ), h( , { class:  b.online ? 'good' : 'bad'   }, b.online ? 
+
+⚠ src/ui/panelInventory.js
+   hot
+      142: class:  active ? ' hot' : ''  ,
+   melee
+      149: def?.kind === 'melee' ? '近战' : def?.kind === 'beam' ? '光束' : def?.kind === 'lob'
+   beam
+      149: def?.kind === 'melee' ? '近战' : def?.kind === 'beam' ? '光束' : def?.kind === 'lob'
+   lob
+      149: def?.kind === 'melee' ? '近战' : def?.kind === 'beam' ? '光束' : def?.kind === 'lob'
+   cone
+      149: def?.kind === 'melee' ? '近战' : def?.kind === 'beam' ? '光束' : def?.kind === 'lob'
+   chain
+      149: def?.kind === 'melee' ? '近战' : def?.kind === 'beam' ? '光束' : def?.kind === 'lob'
+
+⚠ src/ui/panelPlanet.js
+   good
+      28: h( , { class:   },  ), h( , { class:  run.planetClaimed ? 'good' : 'bad'   }, ru
+   bad
+      28: h( , { class:   },  ), h( , { class:  run.planetClaimed ? 'good' : 'bad'   }, ru
+
+⚠ src/ui/panelSystem.js
+   zh
+      63: ?  meta.planet  meta.characterName || meta.character  meta.level  meta.day  meta
+   CN
+      63: ?  meta.planet  meta.characterName || meta.character  meta.level  meta.day  meta
+
+⚠ src/ui/panelTown.js
+   hot
+      207: class:  run.population >= t.pop ? ' hot' : ''  ,
+
+⚠ src/ui/ui.js
+   bad
+      285: h( , { class:   },  ), h( , { class:  site.nestNear ? 'bad' : 'good'   },  site.
+   good
+      285: h( , { class:   },  ), h( , { class:  site.nestNear ? 'bad' : 'good'   },  site.
+
+合计 29 处可疑（短名 / 被当函数调用，且本文件里找不到声明）

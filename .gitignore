@@ -1,1 +1,49 @@
-# 占位，真正的 .gitignore 在下一个提交里覆盖
+# 依赖与构建产物
+node_modules/
+dist/
+out/
+steam_build_output/
+
+# Godot 侧：导出产物与引擎二进制（都能从源码重新生成）
+# —— 引擎动辄 250 MB、导出包 95 MB，GitHub 单文件上限 100 MB，推上去也没意义
+dist-godot/
+tools/godot-dl/exe/
+tools/godot-dl/*.zip
+# 导出模板（1.15 GB，Godot 自带，绝对不该进仓库）
+# ⚠️ .gitignore **不支持行尾注释** —— 写成 `*.tpz  # 说明` 会让整行变成一条
+#    永远匹配不上的模式（这次的坑：templates.tpz 就是这样溜进暂存区的）
+tools/godot-dl/*.tpz
+godot/addons/godotsteam/*.exe
+tools/rcedit-x64.exe
+godot/.godot/
+*.import.bak
+
+# 验证日志（每次跑都会重新生成）
+tools/verify-out*.txt
+
+# 素材源包：CC0 可重下，登记在 assets/manifest.json 与 ASSETS.md 里
+# （真正被游戏使用的贴图已经拷进 godot/assets/，那部分照常提交）
+assets-src/
+assets/_x_*/
+assets/_dl_*.zip
+
+# Steam 开发调试文件（绝对不能进包）
+steam_appid.txt
+steam/app_build_*.vdf
+steam/depot_build_*.vdf
+
+# 本地生成的截图与基准输出
+tools/shots/
+
+# 下载的素材包（体积大；只提交挑出来并登记进 manifest 的那几张）
+assets/_packs/
+assets/fonts/
+
+# 备份与临时文件
+*.bak
+*.tmp
+*.log
+
+# 编辑器
+.vscode/
+.idea/

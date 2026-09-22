@@ -1,0 +1,25 @@
+{
+  "_comment": "素材清单。文件不存在时游戏会静默回退到程序化绘制，所以这个表可以只填一部分。命名约定见 assets/ASSETS.md §11.3 与 §11.1。",
+  "_howto": [
+    "1. 从 ASSETS.md §0「推荐组合」里的三个包开始下载（Tower Defense Top-Down / Sci-fi RTS / UI Pack: Sci-Fi）",
+    "2. 解压到 assets/ 下的子目录（tiles/ sprites/ ui/ audio/ fonts/）",
+    "3. 在下面的 entries 里登记：逻辑名 -> 相对 assets/ 的路径",
+    "4. 刷新游戏即可；没登记的对象仍然用程序化图形画，所以可以一个一个换"
+  ],
+  "_idConvention": {
+    "tile": "tile.terrain.<名字>，名字表见 src/core/assets.js 的 TILE_ASSET_NAME（grass / sand / ash / rock / crystal / nest-wall …）",
+    "prop": "prop.<PROP 的 key>，例如 prop.sporeTree",
+    "enemy": "enemy.<MONSTER 的 key>，例如 enemy.stalker",
+    "tower": "tower.<TOWER_DEF 的 id>，例如 tower.sentry",
+    "vehicle": "vehicle.<名字>",
+    "ui": "ui.<面板/控件>，例如 ui.panel.buildmenu",
+    "fx": "fx.<效果>，例如 fx.impact.small",
+    "sfx": "sfx.<动作>，值为变体数组，播放时随机取一个",
+    "bgm": "bgm.<场景>，例如 bgm.explore",
+    "font": "font.pixel.cn（中文像素字体，界面必需）"
+  },
+  "pack": "",
+  "license": "",
+  "tileSize": 40,
+  "entries": {}
+}

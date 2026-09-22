@@ -1,0 +1,103 @@
+{
+  "BASE": {
+    "maxHp": 2600,
+    "hpPerLevel": 420,
+    "repairRate": 34,
+    "repairCostPerHp": 0.22,
+    "popDeathOnDestroy": 1,
+    "rebuildTime": 12,
+    "rebuildPerTap": 0.55,
+    "alarmWaveGap": 26
+  },
+  "BEACON": {
+    "baseRadius": 900,
+    "radiusPerLevel": 300,
+    "baseIntensity": 0.28,
+    "intensityPerLevel": 0.14,
+    "maxLevel": 12,
+    "waveIntervalBase": 150,
+    "waveIntervalMin": 66,
+    "fuelMax": 100,
+    "fuelPerSec": 0.16,
+    "fuelPerWave": 6,
+    "overloadRadiusMult": 1.35
+  },
+  "CHUNK": 16,
+  "DAY_LENGTH": 240,
+  "ECON": {
+    "startingGold": 260,
+    "startingMat": 90,
+    "goldPerKill": 1,
+    "autoCollectRadius": 240,
+    "levelBase": 92,
+    "levelGrowth": 1.19,
+    "xpScale": 2.8
+  },
+  "FIXED_DT": 0.016666666666666666,
+  "FLOW_CELL": 2,
+  "MAP_SCALE": 2.9834710743801653,
+  "NEST": {
+    "baseHp": 900,
+    "hpPerTier": 400,
+    "spawnPerMinute": 1.5,
+    "threatPerNest": 1,
+    "rewardGold": 140,
+    "rewardMat": 45,
+    "rewardBeaconCore": 1,
+    "xp": 220
+  },
+  "PLAYER": {
+    "baseSpeed": 172,
+    "sprintMult": 1.42,
+    "dodgeSpeed": 560,
+    "dodgeTime": 0.19,
+    "dodgeCooldown": 0.85,
+    "dodgeIFrames": 0.28,
+    "staminaMax": 100,
+    "staminaRegen": 21,
+    "sprintCost": 17,
+    "dodgeCost": 22,
+    "pickupRadius": 26,
+    "magnetBase": 96,
+    "reviveTime": 2.5,
+    "ammoMax": 200,
+    "ammoStart": 160
+  },
+  "RENDER": {
+    "baseW": 1280,
+    "baseH": 720,
+    "maxDPR": 2,
+    "shadowBlur": false,
+    "minimapSize": 220,
+    "chunkCacheLimit": 220
+  },
+  "SAVE_KEY": "frontier-colony-save-v1",
+  "SAVE_VERSION": 1,
+  "TICK_RATE": 60,
+  "TILE": 40,
+  "TIME_SCALE_LABEL": [
+    "黎明",
+    "白昼",
+    "黄昏",
+    "夜晚"
+  ],
+  "VEHICLE": {
+    "baseSpeed": 240,
+    "boostMult": 1.55,
+    "cargoBase": 24,
+    "fuelMax": 100,
+    "fuelPerSec": 0.62,
+    "collisionDamage": 22,
+    "collisionCooldown": 0.45,
+    "maxTurrets": 2,
+    "maxMeleeModules": 1
+  },
+  "WEAPON_CAPS": {
+    "rangeMult": 2,
+    "damage": 2,
+    "attackSpeed": 1,
+    "projectiles": 2
+  },
+  "WORLD_PX": 12160,
+  "WORLD_TILES": 304
+}

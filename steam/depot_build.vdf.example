@@ -1,0 +1,22 @@
+// Steam depot 构建脚本模板（depot_build_windows.vdf）
+//
+// 用法：复制成 steam/depot_build_windows.vdf，把 <DepotID> 换成真实数字。
+// 被 app_build_<AppID>.vdf 引用，不需要单独执行。
+
+"DepotBuildConfig"
+{
+	"DepotID" "<DepotID>"
+	// 相对于 app_build 的 ContentRoot
+	"ContentRoot" "..\\dist\\win-unpacked\\"
+	"FileMapping"
+	{
+		"LocalPath" "*"
+		"DepotPath" "."
+		"recursive" "1"
+	}
+	// 这些文件不进包：开发调试留下的东西
+	"FileExclusion" "*.pdb"
+	"FileExclusion" "**/*.log"
+	"FileExclusion" "steam_appid.txt"
+	"FileExclusion" "**/*.bak"
+}

@@ -1,0 +1,2479 @@
+{
+  "DIR": {
+    "ADMIN": "admin",
+    "DEFENSE": "defense",
+    "EXPLORE": "explore"
+  },
+  "DIR_DEF": {
+    "admin": {
+      "name": "经营",
+      "icon": "⌂",
+      "color": "#6ee7a8",
+      "desc": "人口、生产、自动化、经济。让殖民地自己长大。"
+    },
+    "defense": {
+      "name": "塔防",
+      "icon": "🛡",
+      "color": "#59d8ff",
+      "desc": "防御塔、基地、吸引阵列。让基地固若金汤。"
+    },
+    "explore": {
+      "name": "探索",
+      "icon": "⛟",
+      "color": "#ffba4c",
+      "desc": "载具、战斗、野外生存。让你敢走更远。"
+    }
+  },
+  "EXPERIMENTS": [
+    {
+      "id": "a_ration",
+      "dir": "admin",
+      "name": "配给优化",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "foodEfficiency": 0.15,
+        "hpRegen": 0.25
+      },
+      "desc": "殖民地配给更合理。食物效果 +15%，生命回复 +0.25/秒。"
+    },
+    {
+      "id": "a_toolbox",
+      "dir": "admin",
+      "name": "标准工具箱",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "buildSpeed": 0.25,
+        "mineSpeed": 0.2
+      },
+      "desc": "建造速度 +25%，采集速度 +20%。"
+    },
+    {
+      "id": "a_ledger",
+      "dir": "admin",
+      "name": "殖民地账簿",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 95,
+      "effect": {
+        "goldMult": 0.15,
+        "matMult": 0.15
+      },
+      "desc": "金币与材料获取 +15%。"
+    },
+    {
+      "id": "a_storage",
+      "dir": "admin",
+      "name": "立体仓储",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 4,
+      "weight": 85,
+      "effect": {
+        "storageCap": 250,
+        "carryMult": 0.2
+      },
+      "desc": "资源上限 +250，背包 +20%。"
+    },
+    {
+      "id": "a_nursery",
+      "dir": "admin",
+      "name": "育婴舱",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 62,
+      "effect": {
+        "popGrowthMult": 0.45,
+        "popCap": 3
+      },
+      "desc": "人口增长 +45%，人口上限 +3。"
+    },
+    {
+      "id": "a_drone",
+      "dir": "admin",
+      "name": "回收无人机",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 1,
+      "weight": 58,
+      "effect": {
+        "autoCollect": 1,
+        "autoCollectRadius": 420
+      },
+      "desc": "战斗结束后，经验与掉落物由无人机自动回收 —— 你不用再跑回去捡。"
+    },
+    {
+      "id": "a_conveyor",
+      "dir": "admin",
+      "name": "自动传送带",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 20,
+      "effect": {
+        "autoCollect": 1,
+        "autoCollectRadius": 1500,
+        "autoDeposit": 1
+      },
+      "desc": "全图范围的自动回收，并直接存入仓库（连基地都不用回）。"
+    },
+    {
+      "id": "a_shift",
+      "dir": "admin",
+      "name": "三班倒制度",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 60,
+      "effect": {
+        "workerEfficiency": 0.35,
+        "jobSlots": 1
+      },
+      "desc": "工人效率 +35%，每个建筑多 1 个岗位。"
+    },
+    {
+      "id": "a_engineerCorps",
+      "dir": "admin",
+      "name": "工程兵编制",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 22,
+      "effect": {
+        "autoRepairBase": 10,
+        "repairCostMult": -0.35
+      },
+      "desc": "基地范围内建筑自动修复，且维修几乎不耗材料。"
+    },
+    {
+      "id": "a_market",
+      "dir": "admin",
+      "name": "黑市渠道",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 52,
+      "effect": {
+        "tradeDiscount": 0.15,
+        "sellBonus": 0.2
+      },
+      "desc": "解锁资源互换，汇率优惠 15%，出售收益 +20%。"
+    },
+    {
+      "id": "a_taxOffice",
+      "dir": "admin",
+      "name": "税收署",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 55,
+      "effect": {
+        "passiveGold": 0.7
+      },
+      "desc": "每秒自动产生 0.7 金币（离线也结算一部分）。"
+    },
+    {
+      "id": "a_expedition",
+      "dir": "admin",
+      "name": "远征后勤",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 56,
+      "effect": {
+        "xpMult": 0.2,
+        "lootQuality": 0.2
+      },
+      "desc": "经验 +20%，掉落品质 +20%。"
+    },
+    {
+      "id": "a_smelter",
+      "dir": "admin",
+      "name": "现场冶炼炉",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 50,
+      "effect": {
+        "smeltOnKill": 1
+      },
+      "desc": "击杀怪物时直接从尸体提炼金属与硫磺。"
+    },
+    {
+      "id": "a_blueprint",
+      "dir": "admin",
+      "name": "蓝图复用",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 54,
+      "effect": {
+        "buildCostMult": -0.15
+      },
+      "desc": "所有建造费用 -15%。"
+    },
+    {
+      "id": "a_org",
+      "dir": "admin",
+      "name": "组织架构学",
+      "kind": "stat",
+      "rarity": "epic",
+      "maxLv": 3,
+      "weight": 18,
+      "effect": {
+        "popGrowthMult": 0.6,
+        "workerEfficiency": 0.4,
+        "popCap": 6
+      },
+      "desc": "人口增长 +60%、工人效率 +40%、人口上限 +6。"
+    },
+    {
+      "id": "a_bank",
+      "dir": "admin",
+      "name": "殖民地银行",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 16,
+      "effect": {
+        "goldInterest": 0.02
+      },
+      "desc": "每波怪潮结束后，按当前金币的 2% 结算利息。钱生钱。"
+    },
+    {
+      "id": "a_vault",
+      "dir": "admin",
+      "name": "深层地窖",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 15,
+      "effect": {
+        "deathPenaltyImmunity": 1,
+        "respawnAtBase": 1
+      },
+      "desc": "死亡不再损失携带的资源，并且直接在基地复活。"
+    },
+    {
+      "id": "a_geneBank",
+      "dir": "admin",
+      "name": "基因样本库",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 48,
+      "effect": {
+        "dnaMult": 0.5,
+        "bioPointGain": 0.4
+      },
+      "desc": "基因样本 +50%，生物科技点获取 +40%。"
+    },
+    {
+      "id": "a_beaconGrid",
+      "dir": "admin",
+      "name": "能源网格",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 52,
+      "effect": {
+        "beaconFuelMult": -0.22,
+        "powerOutput": 0.5
+      },
+      "desc": "吸引阵列能耗 -22%，发电机输出 +50%。"
+    },
+    {
+      "id": "a_legend",
+      "dir": "admin",
+      "name": "奇迹 · 自给自足",
+      "kind": "mechanic",
+      "rarity": "legend",
+      "maxLv": 1,
+      "weight": 4,
+      "effect": {
+        "selfSufficient": 1,
+        "passiveGold": 2,
+        "autoRepairBase": 8,
+        "popGrowthMult": 0.5
+      },
+      "desc": "奇迹：殖民地进入完全自给状态 —— 每秒 2 金币、建筑自动修复、人口快速增长。你可以长期在外探索。"
+    },
+    {
+      "id": "d_caliber",
+      "dir": "defense",
+      "name": "口径加大",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "towerDamage": 0.16
+      },
+      "desc": "所有防御塔伤害 +16%。"
+    },
+    {
+      "id": "d_cooling",
+      "dir": "defense",
+      "name": "循环冷却",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "towerAttackSpeed": 0.14
+      },
+      "desc": "所有防御塔攻速 +14%。"
+    },
+    {
+      "id": "d_range",
+      "dir": "defense",
+      "name": "瞄准阵列",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 4,
+      "weight": 92,
+      "effect": {
+        "towerRange": 0.15
+      },
+      "desc": "所有防御塔射程 +15%。"
+    },
+    {
+      "id": "d_armor",
+      "dir": "defense",
+      "name": "复合装甲",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 96,
+      "effect": {
+        "structureHpMult": 0.3,
+        "structureArmor": 4
+      },
+      "desc": "所有建筑耐久 +30%，护甲 +4。"
+    },
+    {
+      "id": "d_cap",
+      "dir": "defense",
+      "name": "扩建审批",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 5,
+      "weight": 66,
+      "effect": {
+        "towerCap": 3,
+        "towerSlotRadius": 60
+      },
+      "desc": "防御塔上限 +3，可建造范围扩大。"
+    },
+    {
+      "id": "d_explosive",
+      "dir": "defense",
+      "name": "爆裂弹头",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 56,
+      "effect": {
+        "towerExplode": {
+          "radius": 90,
+          "mult": 0.45
+        }
+      },
+      "desc": "所有防御塔的攻击附带小范围爆炸（45% 伤害）。"
+    },
+    {
+      "id": "d_freeze",
+      "dir": "defense",
+      "name": "低温弹链",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 54,
+      "effect": {
+        "towerSlow": {
+          "amount": 0.3,
+          "dur": 2
+        },
+        "ignoreSlowResist": 1
+      },
+      "desc": "所有防御塔攻击使敌人减速 30%（可叠加来源）。"
+    },
+    {
+      "id": "d_incendiary",
+      "dir": "defense",
+      "name": "燃烧弹",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 52,
+      "effect": {
+        "towerBurn": {
+          "dps": 12,
+          "dur": 4
+        }
+      },
+      "desc": "防御塔命中使敌人灼烧，4 秒内持续掉血。"
+    },
+    {
+      "id": "d_chainAmmo",
+      "dir": "defense",
+      "name": "连锁弹药",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 20,
+      "effect": {
+        "towerChain": {
+          "chains": 3,
+          "falloff": 0.7
+        }
+      },
+      "desc": "防御塔的攻击会向附近 3 个敌人跳跃传导。"
+    },
+    {
+      "id": "d_overcharge",
+      "dir": "defense",
+      "name": "过载电容",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 50,
+      "effect": {
+        "towerOvercharge": {
+          "every": 8,
+          "mult": 3
+        }
+      },
+      "desc": "每座塔每 8 秒打出一发 3 倍伤害的过载弹。"
+    },
+    {
+      "id": "d_focus",
+      "dir": "defense",
+      "name": "集火协议",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 52,
+      "effect": {
+        "focusFire": 0.05
+      },
+      "desc": "所有防御塔集火同一目标时，每个额外攻击者 +5% 伤害。虫潮越猛收益越高。"
+    },
+    {
+      "id": "d_manual",
+      "dir": "defense",
+      "name": "手动接管强化",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 54,
+      "effect": {
+        "manualDamageMult": 0.6,
+        "manualSplash": {
+          "radius": 110,
+          "mult": 0.35
+        }
+      },
+      "desc": "你亲手接管的防御塔伤害 +60% 并附带范围伤害。塔防也可以很爽。"
+    },
+    {
+      "id": "d_beacon",
+      "dir": "defense",
+      "name": "吸引调谐",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 58,
+      "effect": {
+        "beaconRadiusMult": 0.2,
+        "beaconIntensityMult": 0.08
+      },
+      "desc": "吸引半径 +20%，牵引强度 +8%。拉更多怪 = 更多收益。"
+    },
+    {
+      "id": "d_fuel",
+      "dir": "defense",
+      "name": "燃料再生",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 60,
+      "effect": {
+        "beaconFuelMult": -0.25,
+        "beaconFuelRegen": 0.4
+      },
+      "desc": "吸引阵列能耗 -25%，并自动缓慢回能。"
+    },
+    {
+      "id": "d_repair",
+      "dir": "defense",
+      "name": "战时抢修",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 58,
+      "effect": {
+        "repairMult": 0.6,
+        "repairCostMult": -0.25
+      },
+      "desc": "维修速度 +60%，材料消耗 -25%。"
+    },
+    {
+      "id": "d_airdrop",
+      "dir": "defense",
+      "name": "快速空投",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 56,
+      "effect": {
+        "airDropSpeed": -0.4,
+        "buildSpeed": 0.4
+      },
+      "desc": "防御塔空投与建造速度 +40%。"
+    },
+    {
+      "id": "d_lastStand",
+      "dir": "defense",
+      "name": "背水一战",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 22,
+      "effect": {
+        "lastStand": {
+          "hpThreshold": 0.4,
+          "towerDamage": 0.5,
+          "towerAttackSpeed": 0.5
+        }
+      },
+      "desc": "基地耐久低于 40% 时，所有防御塔伤害与攻速 +50%。"
+    },
+    {
+      "id": "d_vengeance",
+      "dir": "defense",
+      "name": "复仇协议",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 20,
+      "effect": {
+        "vengeance": {
+          "duration": 20,
+          "towerDamage": 0.15,
+          "towerAttackSpeed": 0.15
+        }
+      },
+      "desc": "每座防御塔被摧毁，其余所有塔永久获得 +15% 伤害与攻速（每波重置）。"
+    },
+    {
+      "id": "d_rebuild",
+      "dir": "defense",
+      "name": "自动重建",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 18,
+      "effect": {
+        "airDropAuto": 1,
+        "rebuildDiscount": 0.4
+      },
+      "desc": "被摧毁的防御塔会自动重新空投，费用 -40%。"
+    },
+    {
+      "id": "d_shieldGen",
+      "dir": "defense",
+      "name": "护盾发生器",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 17,
+      "effect": {
+        "baseShield": {
+          "amount": 800,
+          "regen": 20
+        }
+      },
+      "desc": "基地获得一层会自行恢复的护盾，先于耐久被消耗。"
+    },
+    {
+      "id": "d_legend",
+      "dir": "defense",
+      "name": "奇迹 · 钢铁要塞",
+      "kind": "mechanic",
+      "rarity": "legend",
+      "maxLv": 1,
+      "weight": 4,
+      "effect": {
+        "towerDamage": 0.35,
+        "towerAttackSpeed": 0.3,
+        "structureHpMult": 0.8,
+        "towerCap": 6,
+        "towerExplode": {
+          "radius": 120,
+          "mult": 0.5
+        }
+      },
+      "desc": "奇迹：伤害 +35%、攻速 +30%、建筑耐久 +80%、塔上限 +6，且全部攻击带爆炸。基地成为真正的要塞。"
+    },
+    {
+      "id": "e_boots",
+      "dir": "explore",
+      "name": "轻量外骨骼",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "speedMult": 0.07
+      },
+      "desc": "移动速度 +7%。"
+    },
+    {
+      "id": "e_plating",
+      "dir": "explore",
+      "name": "个人装甲",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "hpMax": 22,
+        "armor": 3
+      },
+      "desc": "生命上限 +22，护甲 +3。"
+    },
+    {
+      "id": "e_scope",
+      "dir": "explore",
+      "name": "战术目镜",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 96,
+      "effect": {
+        "critChance": 0.04,
+        "critMult": 0.12
+      },
+      "desc": "暴击率 +4%，暴击伤害 +12%。"
+    },
+    {
+      "id": "e_medkit",
+      "dir": "explore",
+      "name": "野战医疗",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 96,
+      "effect": {
+        "hpRegen": 0.6,
+        "healPower": 0.25
+      },
+      "desc": "生命回复 +0.6/秒，治疗效果 +25%。"
+    },
+    {
+      "id": "e_ammo",
+      "dir": "explore",
+      "name": "弹药合成",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 60,
+      "effect": {
+        "ammoCraft": 1,
+        "ammoCostMult": -0.4
+      },
+      "desc": "可在野外用手头材料现场合成弹药，弹药消耗 -40%。"
+    },
+    {
+      "id": "e_engine",
+      "dir": "explore",
+      "name": "引擎调校",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 5,
+      "weight": 62,
+      "effect": {
+        "vehicleSpeedMult": 0.18
+      },
+      "desc": "载具速度 +18%。"
+    },
+    {
+      "id": "e_hull",
+      "dir": "explore",
+      "name": "载具装甲",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 58,
+      "effect": {
+        "vehicleHpMult": 0.5,
+        "ramMult": 0.4
+      },
+      "desc": "载具耐久 +50%，撞击伤害 +40%。"
+    },
+    {
+      "id": "e_harvest",
+      "dir": "explore",
+      "name": "高效采集",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 60,
+      "effect": {
+        "mineSpeed": 0.4,
+        "matMult": 0.2
+      },
+      "desc": "采集速度 +40%，材料获取 +20%。"
+    },
+    {
+      "id": "e_luck",
+      "dir": "explore",
+      "name": "拾荒者的直觉",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 58,
+      "effect": {
+        "luck": 0.12,
+        "lootQuality": 0.25
+      },
+      "desc": "幸运 +12%，掉落品质 +25%。"
+    },
+    {
+      "id": "e_scanner",
+      "dir": "explore",
+      "name": "深层扫描",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 54,
+      "effect": {
+        "revealRadius": 500,
+        "resourceSense": 1
+      },
+      "desc": "小地图自动标出附近的资源富集点与巢穴。"
+    },
+    {
+      "id": "e_beaconPort",
+      "dir": "explore",
+      "name": "便携吸引装置",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 20,
+      "effect": {
+        "portableBeacon": 1
+      },
+      "desc": "载具上可挂一台便携吸引装置 —— 你可以主动决定怪潮往哪冲。"
+    },
+    {
+      "id": "e_hunter",
+      "dir": "explore",
+      "name": "猎杀本能",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 56,
+      "effect": {
+        "eliteDamage": 0.25,
+        "bossDamage": 0.2
+      },
+      "desc": "对精英怪伤害 +25%，对 Boss 伤害 +20%。"
+    },
+    {
+      "id": "e_lifesteal",
+      "dir": "explore",
+      "name": "生命汲取",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 3,
+      "weight": 22,
+      "effect": {
+        "lifeSteal": 0.04
+      },
+      "desc": "造成伤害的 4% 转化为生命。"
+    },
+    {
+      "id": "e_thorns",
+      "dir": "explore",
+      "name": "应激反射",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 52,
+      "effect": {
+        "thorn": 14,
+        "counterWave": {
+          "radius": 120,
+          "mult": 0.6
+        }
+      },
+      "desc": "受到近战伤害时向周围释放冲击波反击。"
+    },
+    {
+      "id": "e_night",
+      "dir": "explore",
+      "name": "夜行者",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 50,
+      "effect": {
+        "nightVision": 1,
+        "nightDamage": 0.3,
+        "sightBonus": 200
+      },
+      "desc": "夜间视野满格，且夜间伤害 +30%。夜晚变成你的主场。"
+    },
+    {
+      "id": "e_thermal",
+      "dir": "explore",
+      "name": "环境适应服",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 54,
+      "effect": {
+        "hazardResist": 0.4,
+        "coldResist": 0.3,
+        "heatResist": 0.3,
+        "acidResist": 0.3
+      },
+      "desc": "地形伤害与环境惩罚 -40%。"
+    },
+    {
+      "id": "e_dash",
+      "dir": "explore",
+      "name": "瞬闪模块",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 3,
+      "weight": 20,
+      "effect": {
+        "dodgeCdMult": -0.3,
+        "dodgeDamage": {
+          "mult": 1.5,
+          "radius": 90
+        }
+      },
+      "desc": "闪避冷却 -30%，且闪避穿过的敌人受到 150% 伤害。"
+    },
+    {
+      "id": "e_quantum",
+      "dir": "explore",
+      "name": "量子背包",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 16,
+      "effect": {
+        "carryMult": 2,
+        "autoDeposit": 1
+      },
+      "desc": "背包容量翻倍，且采集物直接进仓库（不用带回家）。"
+    },
+    {
+      "id": "e_relic",
+      "dir": "explore",
+      "name": "遗物共鸣",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 15,
+      "effect": {
+        "relicChance": 0.12,
+        "lootQuality": 0.3
+      },
+      "desc": "精英怪有 12% 几率掉落【遗物】级装备。"
+    },
+    {
+      "id": "e_supply",
+      "dir": "explore",
+      "name": "深空补给线",
+      "kind": "stat",
+      "rarity": "epic",
+      "maxLv": 3,
+      "weight": 18,
+      "effect": {
+        "supplyDropRate": 0.5
+      },
+      "desc": "太空快递的频率 +50%，且每份物资更多。"
+    },
+    {
+      "id": "e_legend",
+      "dir": "explore",
+      "name": "奇迹 · 独行拓荒者",
+      "kind": "mechanic",
+      "rarity": "legend",
+      "maxLv": 1,
+      "weight": 4,
+      "effect": {
+        "speedMult": 0.2,
+        "lifeSteal": 0.06,
+        "xpMult": 0.3,
+        "autoCollect": 1,
+        "autoCollectRadius": 900,
+        "carryMult": 0.5
+      },
+      "desc": "奇迹：移速 +20%、吸血 6%、经验 +30%、背包 +50%，并自带大范围自动回收。一个人就是一支远征队。"
+    },
+    {
+      "id": "x_eng_ram",
+      "dir": "defense",
+      "name": "工程兵准则",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 70,
+      "exclusive": "engineer",
+      "effect": {
+        "repairMult": 0.8,
+        "buildSpeed": 0.5,
+        "buildCostMult": -0.1
+      },
+      "desc": "【工程师】维修 +80%、建造 +50%、建造费 -10%。"
+    },
+    {
+      "id": "x_eng_boom",
+      "dir": "defense",
+      "name": "自爆协议",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 34,
+      "exclusive": "engineer",
+      "effect": {
+        "towerExplodeOnDeath": {
+          "radius": 150,
+          "dmg": 220
+        }
+      },
+      "desc": "【工程师】防御塔被摧毁时自爆，对周围造成 220 伤害 —— 死的塔也要带走几只虫。"
+    },
+    {
+      "id": "x_eng_twin",
+      "dir": "defense",
+      "name": "双联装塔架",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 30,
+      "exclusive": "engineer",
+      "effect": {
+        "towerExtraShot": 1,
+        "towerDamage": -0.1
+      },
+      "desc": "【工程师】防御塔额外射出一发（伤害 -10% 作为代价）。火力密度翻倍。"
+    },
+    {
+      "id": "x_eng_foundry",
+      "dir": "admin",
+      "name": "前线铸造厂",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 68,
+      "exclusive": "engineer",
+      "effect": {
+        "smeltOnKill": 1,
+        "matMult": 0.3
+      },
+      "desc": "【工程师】击杀怪物直接提炼金属，材料 +30%。"
+    },
+    {
+      "id": "x_eng_blueprint",
+      "dir": "admin",
+      "name": "完美蓝图",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 32,
+      "exclusive": "engineer",
+      "effect": {
+        "towerCap": 8,
+        "structureHpMult": 0.4
+      },
+      "desc": "【工程师】防御塔上限 +8，建筑耐久 +40%。"
+    },
+    {
+      "id": "x_pio_rage",
+      "dir": "explore",
+      "name": "战意沸腾",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 70,
+      "exclusive": "pioneer",
+      "effect": {
+        "rageBonus": 0.3,
+        "lowHpArmor": 10
+      },
+      "desc": "【开拓者】血量越低伤害越高（每级 +30% 上限），残血时额外 +10 护甲。"
+    },
+    {
+      "id": "x_pio_exec",
+      "dir": "explore",
+      "name": "处决",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 34,
+      "exclusive": "pioneer",
+      "effect": {
+        "execute": {
+          "threshold": 0.16,
+          "heal": 12
+        }
+      },
+      "desc": "【开拓者】对生命低于 16% 的敌人直接处决，并回复 12 点生命。"
+    },
+    {
+      "id": "x_pio_wall",
+      "dir": "explore",
+      "name": "破壁冲锋",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 66,
+      "exclusive": "pioneer",
+      "effect": {
+        "dodgeDamage": {
+          "mult": 2,
+          "radius": 110
+        },
+        "dodgeCdMult": -0.2
+      },
+      "desc": "【开拓者】闪避撞击造成 200% 伤害并击退，冷却 -20%。"
+    },
+    {
+      "id": "x_pio_arsenal",
+      "dir": "explore",
+      "name": "重武器库",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 30,
+      "exclusive": "pioneer",
+      "effect": {
+        "ammoCostMult": -0.5,
+        "pierce": 1
+      },
+      "desc": "【开拓者】弹药消耗 -50%，子弹穿透 +1。"
+    },
+    {
+      "id": "x_pio_medal",
+      "dir": "admin",
+      "name": "战功勋章",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 64,
+      "exclusive": "pioneer",
+      "effect": {
+        "goldMult": 0.35,
+        "xpMult": 0.25,
+        "eliteDamage": 0.15
+      },
+      "desc": "【开拓者】金币 +35%、经验 +25%、对精英伤害 +15%。"
+    },
+    {
+      "id": "x_pil_gun",
+      "dir": "explore",
+      "name": "武器挂架",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 70,
+      "exclusive": "pilot",
+      "effect": {
+        "vehicleSlots": 1,
+        "vehicleWeaponDamage": 0.25
+      },
+      "desc": "【驾驶员】载具挂载槽 +1，车载武器伤害 +25%。"
+    },
+    {
+      "id": "x_pil_turret",
+      "dir": "defense",
+      "name": "载具即炮台",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 34,
+      "exclusive": "pilot",
+      "effect": {
+        "vehicleAsTurret": 1,
+        "vehicleWeaponDamage": 0.3
+      },
+      "desc": "【驾驶员】把载具停在基地里时，车载武器会像防御塔一样自动守卫基地。"
+    },
+    {
+      "id": "x_pil_ram",
+      "dir": "explore",
+      "name": "碾压者",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 68,
+      "exclusive": "pilot",
+      "effect": {
+        "ramMult": 1.4,
+        "vehicleHpMult": 0.4,
+        "collisionHeal": 4
+      },
+      "desc": "【驾驶员】撞击伤害 +140%，每次撞死怪物回复 4 点载具耐久。"
+    },
+    {
+      "id": "x_pil_convoy",
+      "dir": "admin",
+      "name": "运输车队",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 62,
+      "exclusive": "pilot",
+      "effect": {
+        "cargoBonus": 40,
+        "matMult": 0.35,
+        "vehicleSpeedMult": 0.1
+      },
+      "desc": "【驾驶员】载重 +40，材料获取 +35%。"
+    },
+    {
+      "id": "x_pil_beacon",
+      "dir": "defense",
+      "name": "移动灯塔",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 30,
+      "exclusive": "pilot",
+      "effect": {
+        "portableBeacon": 1,
+        "beaconIntensity": 0.3
+      },
+      "desc": "【驾驶员】载具自带强化版便携吸引装置，牵引强度 +30%。"
+    },
+    {
+      "id": "x_bio_swarm",
+      "dir": "explore",
+      "name": "共生虫群",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 70,
+      "exclusive": "biologist",
+      "effect": {
+        "tameSlots": 2,
+        "tamePower": 0.25
+      },
+      "desc": "【生物学家】驯化上限 +2，驯化单位属性 +25%。"
+    },
+    {
+      "id": "x_bio_acid",
+      "dir": "explore",
+      "name": "强酸体液",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 68,
+      "exclusive": "biologist",
+      "effect": {
+        "poisonOnHit": 8,
+        "dotMult": 0.5
+      },
+      "desc": "【生物学家】攻击附带中毒，持续伤害 +50%。"
+    },
+    {
+      "id": "x_bio_regen",
+      "dir": "admin",
+      "name": "组织再生",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 66,
+      "exclusive": "biologist",
+      "effect": {
+        "regenPct": 0.008,
+        "healPower": 0.4
+      },
+      "desc": "【生物学家】每秒回复最大生命的 0.8%，治疗效果 +40%。"
+    },
+    {
+      "id": "x_bio_harvest",
+      "dir": "admin",
+      "name": "生物质精炼",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 64,
+      "exclusive": "biologist",
+      "effect": {
+        "dnaMult": 0.8,
+        "bioPointGain": 0.8,
+        "matMult": 0.2
+      },
+      "desc": "【生物学家】基因样本 +80%，生物科技点 +80%。"
+    },
+    {
+      "id": "x_bio_control",
+      "dir": "defense",
+      "name": "虫群支配",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 32,
+      "exclusive": "biologist",
+      "effect": {
+        "tameElite": 1,
+        "hiveGuard": 1,
+        "monsterFriendly": 1
+      },
+      "desc": "【生物学家】可驯化精英怪，并让巢穴守卫暂时为你而战。"
+    }
+  ],
+  "EXP_MAP": {
+    "a_ration": {
+      "id": "a_ration",
+      "dir": "admin",
+      "name": "配给优化",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "foodEfficiency": 0.15,
+        "hpRegen": 0.25
+      },
+      "desc": "殖民地配给更合理。食物效果 +15%，生命回复 +0.25/秒。"
+    },
+    "a_toolbox": {
+      "id": "a_toolbox",
+      "dir": "admin",
+      "name": "标准工具箱",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "buildSpeed": 0.25,
+        "mineSpeed": 0.2
+      },
+      "desc": "建造速度 +25%，采集速度 +20%。"
+    },
+    "a_ledger": {
+      "id": "a_ledger",
+      "dir": "admin",
+      "name": "殖民地账簿",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 95,
+      "effect": {
+        "goldMult": 0.15,
+        "matMult": 0.15
+      },
+      "desc": "金币与材料获取 +15%。"
+    },
+    "a_storage": {
+      "id": "a_storage",
+      "dir": "admin",
+      "name": "立体仓储",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 4,
+      "weight": 85,
+      "effect": {
+        "storageCap": 250,
+        "carryMult": 0.2
+      },
+      "desc": "资源上限 +250，背包 +20%。"
+    },
+    "a_nursery": {
+      "id": "a_nursery",
+      "dir": "admin",
+      "name": "育婴舱",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 62,
+      "effect": {
+        "popGrowthMult": 0.45,
+        "popCap": 3
+      },
+      "desc": "人口增长 +45%，人口上限 +3。"
+    },
+    "a_drone": {
+      "id": "a_drone",
+      "dir": "admin",
+      "name": "回收无人机",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 1,
+      "weight": 58,
+      "effect": {
+        "autoCollect": 1,
+        "autoCollectRadius": 420
+      },
+      "desc": "战斗结束后，经验与掉落物由无人机自动回收 —— 你不用再跑回去捡。"
+    },
+    "a_conveyor": {
+      "id": "a_conveyor",
+      "dir": "admin",
+      "name": "自动传送带",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 20,
+      "effect": {
+        "autoCollect": 1,
+        "autoCollectRadius": 1500,
+        "autoDeposit": 1
+      },
+      "desc": "全图范围的自动回收，并直接存入仓库（连基地都不用回）。"
+    },
+    "a_shift": {
+      "id": "a_shift",
+      "dir": "admin",
+      "name": "三班倒制度",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 60,
+      "effect": {
+        "workerEfficiency": 0.35,
+        "jobSlots": 1
+      },
+      "desc": "工人效率 +35%，每个建筑多 1 个岗位。"
+    },
+    "a_engineerCorps": {
+      "id": "a_engineerCorps",
+      "dir": "admin",
+      "name": "工程兵编制",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 22,
+      "effect": {
+        "autoRepairBase": 10,
+        "repairCostMult": -0.35
+      },
+      "desc": "基地范围内建筑自动修复，且维修几乎不耗材料。"
+    },
+    "a_market": {
+      "id": "a_market",
+      "dir": "admin",
+      "name": "黑市渠道",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 52,
+      "effect": {
+        "tradeDiscount": 0.15,
+        "sellBonus": 0.2
+      },
+      "desc": "解锁资源互换，汇率优惠 15%，出售收益 +20%。"
+    },
+    "a_taxOffice": {
+      "id": "a_taxOffice",
+      "dir": "admin",
+      "name": "税收署",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 55,
+      "effect": {
+        "passiveGold": 0.7
+      },
+      "desc": "每秒自动产生 0.7 金币（离线也结算一部分）。"
+    },
+    "a_expedition": {
+      "id": "a_expedition",
+      "dir": "admin",
+      "name": "远征后勤",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 56,
+      "effect": {
+        "xpMult": 0.2,
+        "lootQuality": 0.2
+      },
+      "desc": "经验 +20%，掉落品质 +20%。"
+    },
+    "a_smelter": {
+      "id": "a_smelter",
+      "dir": "admin",
+      "name": "现场冶炼炉",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 50,
+      "effect": {
+        "smeltOnKill": 1
+      },
+      "desc": "击杀怪物时直接从尸体提炼金属与硫磺。"
+    },
+    "a_blueprint": {
+      "id": "a_blueprint",
+      "dir": "admin",
+      "name": "蓝图复用",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 54,
+      "effect": {
+        "buildCostMult": -0.15
+      },
+      "desc": "所有建造费用 -15%。"
+    },
+    "a_org": {
+      "id": "a_org",
+      "dir": "admin",
+      "name": "组织架构学",
+      "kind": "stat",
+      "rarity": "epic",
+      "maxLv": 3,
+      "weight": 18,
+      "effect": {
+        "popGrowthMult": 0.6,
+        "workerEfficiency": 0.4,
+        "popCap": 6
+      },
+      "desc": "人口增长 +60%、工人效率 +40%、人口上限 +6。"
+    },
+    "a_bank": {
+      "id": "a_bank",
+      "dir": "admin",
+      "name": "殖民地银行",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 16,
+      "effect": {
+        "goldInterest": 0.02
+      },
+      "desc": "每波怪潮结束后，按当前金币的 2% 结算利息。钱生钱。"
+    },
+    "a_vault": {
+      "id": "a_vault",
+      "dir": "admin",
+      "name": "深层地窖",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 15,
+      "effect": {
+        "deathPenaltyImmunity": 1,
+        "respawnAtBase": 1
+      },
+      "desc": "死亡不再损失携带的资源，并且直接在基地复活。"
+    },
+    "a_geneBank": {
+      "id": "a_geneBank",
+      "dir": "admin",
+      "name": "基因样本库",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 48,
+      "effect": {
+        "dnaMult": 0.5,
+        "bioPointGain": 0.4
+      },
+      "desc": "基因样本 +50%，生物科技点获取 +40%。"
+    },
+    "a_beaconGrid": {
+      "id": "a_beaconGrid",
+      "dir": "admin",
+      "name": "能源网格",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 52,
+      "effect": {
+        "beaconFuelMult": -0.22,
+        "powerOutput": 0.5
+      },
+      "desc": "吸引阵列能耗 -22%，发电机输出 +50%。"
+    },
+    "a_legend": {
+      "id": "a_legend",
+      "dir": "admin",
+      "name": "奇迹 · 自给自足",
+      "kind": "mechanic",
+      "rarity": "legend",
+      "maxLv": 1,
+      "weight": 4,
+      "effect": {
+        "selfSufficient": 1,
+        "passiveGold": 2,
+        "autoRepairBase": 8,
+        "popGrowthMult": 0.5
+      },
+      "desc": "奇迹：殖民地进入完全自给状态 —— 每秒 2 金币、建筑自动修复、人口快速增长。你可以长期在外探索。"
+    },
+    "d_caliber": {
+      "id": "d_caliber",
+      "dir": "defense",
+      "name": "口径加大",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "towerDamage": 0.16
+      },
+      "desc": "所有防御塔伤害 +16%。"
+    },
+    "d_cooling": {
+      "id": "d_cooling",
+      "dir": "defense",
+      "name": "循环冷却",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "towerAttackSpeed": 0.14
+      },
+      "desc": "所有防御塔攻速 +14%。"
+    },
+    "d_range": {
+      "id": "d_range",
+      "dir": "defense",
+      "name": "瞄准阵列",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 4,
+      "weight": 92,
+      "effect": {
+        "towerRange": 0.15
+      },
+      "desc": "所有防御塔射程 +15%。"
+    },
+    "d_armor": {
+      "id": "d_armor",
+      "dir": "defense",
+      "name": "复合装甲",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 96,
+      "effect": {
+        "structureHpMult": 0.3,
+        "structureArmor": 4
+      },
+      "desc": "所有建筑耐久 +30%，护甲 +4。"
+    },
+    "d_cap": {
+      "id": "d_cap",
+      "dir": "defense",
+      "name": "扩建审批",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 5,
+      "weight": 66,
+      "effect": {
+        "towerCap": 3,
+        "towerSlotRadius": 60
+      },
+      "desc": "防御塔上限 +3，可建造范围扩大。"
+    },
+    "d_explosive": {
+      "id": "d_explosive",
+      "dir": "defense",
+      "name": "爆裂弹头",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 56,
+      "effect": {
+        "towerExplode": {
+          "radius": 90,
+          "mult": 0.45
+        }
+      },
+      "desc": "所有防御塔的攻击附带小范围爆炸（45% 伤害）。"
+    },
+    "d_freeze": {
+      "id": "d_freeze",
+      "dir": "defense",
+      "name": "低温弹链",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 54,
+      "effect": {
+        "towerSlow": {
+          "amount": 0.3,
+          "dur": 2
+        },
+        "ignoreSlowResist": 1
+      },
+      "desc": "所有防御塔攻击使敌人减速 30%（可叠加来源）。"
+    },
+    "d_incendiary": {
+      "id": "d_incendiary",
+      "dir": "defense",
+      "name": "燃烧弹",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 52,
+      "effect": {
+        "towerBurn": {
+          "dps": 12,
+          "dur": 4
+        }
+      },
+      "desc": "防御塔命中使敌人灼烧，4 秒内持续掉血。"
+    },
+    "d_chainAmmo": {
+      "id": "d_chainAmmo",
+      "dir": "defense",
+      "name": "连锁弹药",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 20,
+      "effect": {
+        "towerChain": {
+          "chains": 3,
+          "falloff": 0.7
+        }
+      },
+      "desc": "防御塔的攻击会向附近 3 个敌人跳跃传导。"
+    },
+    "d_overcharge": {
+      "id": "d_overcharge",
+      "dir": "defense",
+      "name": "过载电容",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 50,
+      "effect": {
+        "towerOvercharge": {
+          "every": 8,
+          "mult": 3
+        }
+      },
+      "desc": "每座塔每 8 秒打出一发 3 倍伤害的过载弹。"
+    },
+    "d_focus": {
+      "id": "d_focus",
+      "dir": "defense",
+      "name": "集火协议",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 52,
+      "effect": {
+        "focusFire": 0.05
+      },
+      "desc": "所有防御塔集火同一目标时，每个额外攻击者 +5% 伤害。虫潮越猛收益越高。"
+    },
+    "d_manual": {
+      "id": "d_manual",
+      "dir": "defense",
+      "name": "手动接管强化",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 54,
+      "effect": {
+        "manualDamageMult": 0.6,
+        "manualSplash": {
+          "radius": 110,
+          "mult": 0.35
+        }
+      },
+      "desc": "你亲手接管的防御塔伤害 +60% 并附带范围伤害。塔防也可以很爽。"
+    },
+    "d_beacon": {
+      "id": "d_beacon",
+      "dir": "defense",
+      "name": "吸引调谐",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 58,
+      "effect": {
+        "beaconRadiusMult": 0.2,
+        "beaconIntensityMult": 0.08
+      },
+      "desc": "吸引半径 +20%，牵引强度 +8%。拉更多怪 = 更多收益。"
+    },
+    "d_fuel": {
+      "id": "d_fuel",
+      "dir": "defense",
+      "name": "燃料再生",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 60,
+      "effect": {
+        "beaconFuelMult": -0.25,
+        "beaconFuelRegen": 0.4
+      },
+      "desc": "吸引阵列能耗 -25%，并自动缓慢回能。"
+    },
+    "d_repair": {
+      "id": "d_repair",
+      "dir": "defense",
+      "name": "战时抢修",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 58,
+      "effect": {
+        "repairMult": 0.6,
+        "repairCostMult": -0.25
+      },
+      "desc": "维修速度 +60%，材料消耗 -25%。"
+    },
+    "d_airdrop": {
+      "id": "d_airdrop",
+      "dir": "defense",
+      "name": "快速空投",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 56,
+      "effect": {
+        "airDropSpeed": -0.4,
+        "buildSpeed": 0.4
+      },
+      "desc": "防御塔空投与建造速度 +40%。"
+    },
+    "d_lastStand": {
+      "id": "d_lastStand",
+      "dir": "defense",
+      "name": "背水一战",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 22,
+      "effect": {
+        "lastStand": {
+          "hpThreshold": 0.4,
+          "towerDamage": 0.5,
+          "towerAttackSpeed": 0.5
+        }
+      },
+      "desc": "基地耐久低于 40% 时，所有防御塔伤害与攻速 +50%。"
+    },
+    "d_vengeance": {
+      "id": "d_vengeance",
+      "dir": "defense",
+      "name": "复仇协议",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 20,
+      "effect": {
+        "vengeance": {
+          "duration": 20,
+          "towerDamage": 0.15,
+          "towerAttackSpeed": 0.15
+        }
+      },
+      "desc": "每座防御塔被摧毁，其余所有塔永久获得 +15% 伤害与攻速（每波重置）。"
+    },
+    "d_rebuild": {
+      "id": "d_rebuild",
+      "dir": "defense",
+      "name": "自动重建",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 18,
+      "effect": {
+        "airDropAuto": 1,
+        "rebuildDiscount": 0.4
+      },
+      "desc": "被摧毁的防御塔会自动重新空投，费用 -40%。"
+    },
+    "d_shieldGen": {
+      "id": "d_shieldGen",
+      "dir": "defense",
+      "name": "护盾发生器",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 17,
+      "effect": {
+        "baseShield": {
+          "amount": 800,
+          "regen": 20
+        }
+      },
+      "desc": "基地获得一层会自行恢复的护盾，先于耐久被消耗。"
+    },
+    "d_legend": {
+      "id": "d_legend",
+      "dir": "defense",
+      "name": "奇迹 · 钢铁要塞",
+      "kind": "mechanic",
+      "rarity": "legend",
+      "maxLv": 1,
+      "weight": 4,
+      "effect": {
+        "towerDamage": 0.35,
+        "towerAttackSpeed": 0.3,
+        "structureHpMult": 0.8,
+        "towerCap": 6,
+        "towerExplode": {
+          "radius": 120,
+          "mult": 0.5
+        }
+      },
+      "desc": "奇迹：伤害 +35%、攻速 +30%、建筑耐久 +80%、塔上限 +6，且全部攻击带爆炸。基地成为真正的要塞。"
+    },
+    "e_boots": {
+      "id": "e_boots",
+      "dir": "explore",
+      "name": "轻量外骨骼",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "speedMult": 0.07
+      },
+      "desc": "移动速度 +7%。"
+    },
+    "e_plating": {
+      "id": "e_plating",
+      "dir": "explore",
+      "name": "个人装甲",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 100,
+      "effect": {
+        "hpMax": 22,
+        "armor": 3
+      },
+      "desc": "生命上限 +22，护甲 +3。"
+    },
+    "e_scope": {
+      "id": "e_scope",
+      "dir": "explore",
+      "name": "战术目镜",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 96,
+      "effect": {
+        "critChance": 0.04,
+        "critMult": 0.12
+      },
+      "desc": "暴击率 +4%，暴击伤害 +12%。"
+    },
+    "e_medkit": {
+      "id": "e_medkit",
+      "dir": "explore",
+      "name": "野战医疗",
+      "kind": "stat",
+      "rarity": "common",
+      "maxLv": 5,
+      "weight": 96,
+      "effect": {
+        "hpRegen": 0.6,
+        "healPower": 0.25
+      },
+      "desc": "生命回复 +0.6/秒，治疗效果 +25%。"
+    },
+    "e_ammo": {
+      "id": "e_ammo",
+      "dir": "explore",
+      "name": "弹药合成",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 60,
+      "effect": {
+        "ammoCraft": 1,
+        "ammoCostMult": -0.4
+      },
+      "desc": "可在野外用手头材料现场合成弹药，弹药消耗 -40%。"
+    },
+    "e_engine": {
+      "id": "e_engine",
+      "dir": "explore",
+      "name": "引擎调校",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 5,
+      "weight": 62,
+      "effect": {
+        "vehicleSpeedMult": 0.18
+      },
+      "desc": "载具速度 +18%。"
+    },
+    "e_hull": {
+      "id": "e_hull",
+      "dir": "explore",
+      "name": "载具装甲",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 58,
+      "effect": {
+        "vehicleHpMult": 0.5,
+        "ramMult": 0.4
+      },
+      "desc": "载具耐久 +50%，撞击伤害 +40%。"
+    },
+    "e_harvest": {
+      "id": "e_harvest",
+      "dir": "explore",
+      "name": "高效采集",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 60,
+      "effect": {
+        "mineSpeed": 0.4,
+        "matMult": 0.2
+      },
+      "desc": "采集速度 +40%，材料获取 +20%。"
+    },
+    "e_luck": {
+      "id": "e_luck",
+      "dir": "explore",
+      "name": "拾荒者的直觉",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 58,
+      "effect": {
+        "luck": 0.12,
+        "lootQuality": 0.25
+      },
+      "desc": "幸运 +12%，掉落品质 +25%。"
+    },
+    "e_scanner": {
+      "id": "e_scanner",
+      "dir": "explore",
+      "name": "深层扫描",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 54,
+      "effect": {
+        "revealRadius": 500,
+        "resourceSense": 1
+      },
+      "desc": "小地图自动标出附近的资源富集点与巢穴。"
+    },
+    "e_beaconPort": {
+      "id": "e_beaconPort",
+      "dir": "explore",
+      "name": "便携吸引装置",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 20,
+      "effect": {
+        "portableBeacon": 1
+      },
+      "desc": "载具上可挂一台便携吸引装置 —— 你可以主动决定怪潮往哪冲。"
+    },
+    "e_hunter": {
+      "id": "e_hunter",
+      "dir": "explore",
+      "name": "猎杀本能",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 56,
+      "effect": {
+        "eliteDamage": 0.25,
+        "bossDamage": 0.2
+      },
+      "desc": "对精英怪伤害 +25%，对 Boss 伤害 +20%。"
+    },
+    "e_lifesteal": {
+      "id": "e_lifesteal",
+      "dir": "explore",
+      "name": "生命汲取",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 3,
+      "weight": 22,
+      "effect": {
+        "lifeSteal": 0.04
+      },
+      "desc": "造成伤害的 4% 转化为生命。"
+    },
+    "e_thorns": {
+      "id": "e_thorns",
+      "dir": "explore",
+      "name": "应激反射",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 52,
+      "effect": {
+        "thorn": 14,
+        "counterWave": {
+          "radius": 120,
+          "mult": 0.6
+        }
+      },
+      "desc": "受到近战伤害时向周围释放冲击波反击。"
+    },
+    "e_night": {
+      "id": "e_night",
+      "dir": "explore",
+      "name": "夜行者",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 50,
+      "effect": {
+        "nightVision": 1,
+        "nightDamage": 0.3,
+        "sightBonus": 200
+      },
+      "desc": "夜间视野满格，且夜间伤害 +30%。夜晚变成你的主场。"
+    },
+    "e_thermal": {
+      "id": "e_thermal",
+      "dir": "explore",
+      "name": "环境适应服",
+      "kind": "stat",
+      "rarity": "rare",
+      "maxLv": 4,
+      "weight": 54,
+      "effect": {
+        "hazardResist": 0.4,
+        "coldResist": 0.3,
+        "heatResist": 0.3,
+        "acidResist": 0.3
+      },
+      "desc": "地形伤害与环境惩罚 -40%。"
+    },
+    "e_dash": {
+      "id": "e_dash",
+      "dir": "explore",
+      "name": "瞬闪模块",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 3,
+      "weight": 20,
+      "effect": {
+        "dodgeCdMult": -0.3,
+        "dodgeDamage": {
+          "mult": 1.5,
+          "radius": 90
+        }
+      },
+      "desc": "闪避冷却 -30%，且闪避穿过的敌人受到 150% 伤害。"
+    },
+    "e_quantum": {
+      "id": "e_quantum",
+      "dir": "explore",
+      "name": "量子背包",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 16,
+      "effect": {
+        "carryMult": 2,
+        "autoDeposit": 1
+      },
+      "desc": "背包容量翻倍，且采集物直接进仓库（不用带回家）。"
+    },
+    "e_relic": {
+      "id": "e_relic",
+      "dir": "explore",
+      "name": "遗物共鸣",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 15,
+      "effect": {
+        "relicChance": 0.12,
+        "lootQuality": 0.3
+      },
+      "desc": "精英怪有 12% 几率掉落【遗物】级装备。"
+    },
+    "e_supply": {
+      "id": "e_supply",
+      "dir": "explore",
+      "name": "深空补给线",
+      "kind": "stat",
+      "rarity": "epic",
+      "maxLv": 3,
+      "weight": 18,
+      "effect": {
+        "supplyDropRate": 0.5
+      },
+      "desc": "太空快递的频率 +50%，且每份物资更多。"
+    },
+    "e_legend": {
+      "id": "e_legend",
+      "dir": "explore",
+      "name": "奇迹 · 独行拓荒者",
+      "kind": "mechanic",
+      "rarity": "legend",
+      "maxLv": 1,
+      "weight": 4,
+      "effect": {
+        "speedMult": 0.2,
+        "lifeSteal": 0.06,
+        "xpMult": 0.3,
+        "autoCollect": 1,
+        "autoCollectRadius": 900,
+        "carryMult": 0.5
+      },
+      "desc": "奇迹：移速 +20%、吸血 6%、经验 +30%、背包 +50%，并自带大范围自动回收。一个人就是一支远征队。"
+    },
+    "x_eng_ram": {
+      "id": "x_eng_ram",
+      "dir": "defense",
+      "name": "工程兵准则",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 70,
+      "exclusive": "engineer",
+      "effect": {
+        "repairMult": 0.8,
+        "buildSpeed": 0.5,
+        "buildCostMult": -0.1
+      },
+      "desc": "【工程师】维修 +80%、建造 +50%、建造费 -10%。"
+    },
+    "x_eng_boom": {
+      "id": "x_eng_boom",
+      "dir": "defense",
+      "name": "自爆协议",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 34,
+      "exclusive": "engineer",
+      "effect": {
+        "towerExplodeOnDeath": {
+          "radius": 150,
+          "dmg": 220
+        }
+      },
+      "desc": "【工程师】防御塔被摧毁时自爆，对周围造成 220 伤害 —— 死的塔也要带走几只虫。"
+    },
+    "x_eng_twin": {
+      "id": "x_eng_twin",
+      "dir": "defense",
+      "name": "双联装塔架",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 30,
+      "exclusive": "engineer",
+      "effect": {
+        "towerExtraShot": 1,
+        "towerDamage": -0.1
+      },
+      "desc": "【工程师】防御塔额外射出一发（伤害 -10% 作为代价）。火力密度翻倍。"
+    },
+    "x_eng_foundry": {
+      "id": "x_eng_foundry",
+      "dir": "admin",
+      "name": "前线铸造厂",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 68,
+      "exclusive": "engineer",
+      "effect": {
+        "smeltOnKill": 1,
+        "matMult": 0.3
+      },
+      "desc": "【工程师】击杀怪物直接提炼金属，材料 +30%。"
+    },
+    "x_eng_blueprint": {
+      "id": "x_eng_blueprint",
+      "dir": "admin",
+      "name": "完美蓝图",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 1,
+      "weight": 32,
+      "exclusive": "engineer",
+      "effect": {
+        "towerCap": 8,
+        "structureHpMult": 0.4
+      },
+      "desc": "【工程师】防御塔上限 +8，建筑耐久 +40%。"
+    },
+    "x_pio_rage": {
+      "id": "x_pio_rage",
+      "dir": "explore",
+      "name": "战意沸腾",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 70,
+      "exclusive": "pioneer",
+      "effect": {
+        "rageBonus": 0.3,
+        "lowHpArmor": 10
+      },
+      "desc": "【开拓者】血量越低伤害越高（每级 +30% 上限），残血时额外 +10 护甲。"
+    },
+    "x_pio_exec": {
+      "id": "x_pio_exec",
+      "dir": "explore",
+      "name": "处决",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 34,
+      "exclusive": "pioneer",
+      "effect": {
+        "execute": {
+          "threshold": 0.16,
+          "heal": 12
+        }
+      },
+      "desc": "【开拓者】对生命低于 16% 的敌人直接处决，并回复 12 点生命。"
+    },
+    "x_pio_wall": {
+      "id": "x_pio_wall",
+      "dir": "explore",
+      "name": "破壁冲锋",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 66,
+      "exclusive": "pioneer",
+      "effect": {
+        "dodgeDamage": {
+          "mult": 2,
+          "radius": 110
+        },
+        "dodgeCdMult": -0.2
+      },
+      "desc": "【开拓者】闪避撞击造成 200% 伤害并击退，冷却 -20%。"
+    },
+    "x_pio_arsenal": {
+      "id": "x_pio_arsenal",
+      "dir": "explore",
+      "name": "重武器库",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 30,
+      "exclusive": "pioneer",
+      "effect": {
+        "ammoCostMult": -0.5,
+        "pierce": 1
+      },
+      "desc": "【开拓者】弹药消耗 -50%，子弹穿透 +1。"
+    },
+    "x_pio_medal": {
+      "id": "x_pio_medal",
+      "dir": "admin",
+      "name": "战功勋章",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 64,
+      "exclusive": "pioneer",
+      "effect": {
+        "goldMult": 0.35,
+        "xpMult": 0.25,
+        "eliteDamage": 0.15
+      },
+      "desc": "【开拓者】金币 +35%、经验 +25%、对精英伤害 +15%。"
+    },
+    "x_pil_gun": {
+      "id": "x_pil_gun",
+      "dir": "explore",
+      "name": "武器挂架",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 70,
+      "exclusive": "pilot",
+      "effect": {
+        "vehicleSlots": 1,
+        "vehicleWeaponDamage": 0.25
+      },
+      "desc": "【驾驶员】载具挂载槽 +1，车载武器伤害 +25%。"
+    },
+    "x_pil_turret": {
+      "id": "x_pil_turret",
+      "dir": "defense",
+      "name": "载具即炮台",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 34,
+      "exclusive": "pilot",
+      "effect": {
+        "vehicleAsTurret": 1,
+        "vehicleWeaponDamage": 0.3
+      },
+      "desc": "【驾驶员】把载具停在基地里时，车载武器会像防御塔一样自动守卫基地。"
+    },
+    "x_pil_ram": {
+      "id": "x_pil_ram",
+      "dir": "explore",
+      "name": "碾压者",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 68,
+      "exclusive": "pilot",
+      "effect": {
+        "ramMult": 1.4,
+        "vehicleHpMult": 0.4,
+        "collisionHeal": 4
+      },
+      "desc": "【驾驶员】撞击伤害 +140%，每次撞死怪物回复 4 点载具耐久。"
+    },
+    "x_pil_convoy": {
+      "id": "x_pil_convoy",
+      "dir": "admin",
+      "name": "运输车队",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 62,
+      "exclusive": "pilot",
+      "effect": {
+        "cargoBonus": 40,
+        "matMult": 0.35,
+        "vehicleSpeedMult": 0.1
+      },
+      "desc": "【驾驶员】载重 +40，材料获取 +35%。"
+    },
+    "x_pil_beacon": {
+      "id": "x_pil_beacon",
+      "dir": "defense",
+      "name": "移动灯塔",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 30,
+      "exclusive": "pilot",
+      "effect": {
+        "portableBeacon": 1,
+        "beaconIntensity": 0.3
+      },
+      "desc": "【驾驶员】载具自带强化版便携吸引装置，牵引强度 +30%。"
+    },
+    "x_bio_swarm": {
+      "id": "x_bio_swarm",
+      "dir": "explore",
+      "name": "共生虫群",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 70,
+      "exclusive": "biologist",
+      "effect": {
+        "tameSlots": 2,
+        "tamePower": 0.25
+      },
+      "desc": "【生物学家】驯化上限 +2，驯化单位属性 +25%。"
+    },
+    "x_bio_acid": {
+      "id": "x_bio_acid",
+      "dir": "explore",
+      "name": "强酸体液",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 68,
+      "exclusive": "biologist",
+      "effect": {
+        "poisonOnHit": 8,
+        "dotMult": 0.5
+      },
+      "desc": "【生物学家】攻击附带中毒，持续伤害 +50%。"
+    },
+    "x_bio_regen": {
+      "id": "x_bio_regen",
+      "dir": "admin",
+      "name": "组织再生",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 66,
+      "exclusive": "biologist",
+      "effect": {
+        "regenPct": 0.008,
+        "healPower": 0.4
+      },
+      "desc": "【生物学家】每秒回复最大生命的 0.8%，治疗效果 +40%。"
+    },
+    "x_bio_harvest": {
+      "id": "x_bio_harvest",
+      "dir": "admin",
+      "name": "生物质精炼",
+      "kind": "mechanic",
+      "rarity": "rare",
+      "maxLv": 3,
+      "weight": 64,
+      "exclusive": "biologist",
+      "effect": {
+        "dnaMult": 0.8,
+        "bioPointGain": 0.8,
+        "matMult": 0.2
+      },
+      "desc": "【生物学家】基因样本 +80%，生物科技点 +80%。"
+    },
+    "x_bio_control": {
+      "id": "x_bio_control",
+      "dir": "defense",
+      "name": "虫群支配",
+      "kind": "mechanic",
+      "rarity": "epic",
+      "maxLv": 2,
+      "weight": 32,
+      "exclusive": "biologist",
+      "effect": {
+        "tameElite": 1,
+        "hiveGuard": 1,
+        "monsterFriendly": 1
+      },
+      "desc": "【生物学家】可驯化精英怪，并让巢穴守卫暂时为你而战。"
+    }
+  },
+  "EXP_RARITY": {
+    "common": {
+      "name": "常规",
+      "color": "#a8bcd4",
+      "weight": 100
+    },
+    "rare": {
+      "name": "进阶",
+      "color": "#59d8ff",
+      "weight": 46
+    },
+    "epic": {
+      "name": "突破",
+      "color": "#c08cff",
+      "weight": 17
+    },
+    "legend": {
+      "name": "奇迹",
+      "color": "#ffba4c",
+      "weight": 4
+    }
+  }
+}

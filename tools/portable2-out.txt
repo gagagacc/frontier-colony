@@ -1,0 +1,4 @@
+
+[single] 游戏已经在运行 —— 本次启动退出，已把原窗口切到前台。
+[steam] 未初始化（游戏照常运行，成就与云存档会走本地）：No appID found.  Either launch the game from Steam, or put the file steam_appid.txt containing the correct appID in your game folder.
+[steam] 未连接（成就与统计只在本地记录）

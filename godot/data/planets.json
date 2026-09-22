@@ -1,0 +1,280 @@
+{
+  "PLANET_NAMES": [
+    "开普勒-442b",
+    "格利泽-581g",
+    "比邻星-b",
+    "特拉比斯特-1e",
+    "HD-40307g",
+    "罗斯-128b",
+    "鲸鱼座-tau-f",
+    "开普勒-186f",
+    "卢坦-b",
+    "蒂加登-b",
+    "沃尔夫-1061c",
+    "格利泽-667C-c"
+  ],
+  "PLANET_SUFFIX": [
+    "荒原",
+    "冻土",
+    "熔岩",
+    "孢子洋",
+    "晶海",
+    "黑沙",
+    "风暴",
+    "静默"
+  ],
+  "POP_TIERS": [
+    {
+      "pop": 0,
+      "name": "前哨站",
+      "desc": "只有你一个人。",
+      "unlock": []
+    },
+    {
+      "pop": 6,
+      "name": "定居点",
+      "desc": "上级开始派遣第一批移民。",
+      "unlock": [
+        "farm",
+        "hab",
+        "workshop"
+      ]
+    },
+    {
+      "pop": 16,
+      "name": "殖民镇",
+      "desc": "形成稳定的生产循环。",
+      "unlock": [
+        "mine",
+        "clinic"
+      ]
+    },
+    {
+      "pop": 30,
+      "name": "拓荒城市",
+      "desc": "上级把这里当成区域中心。",
+      "unlock": [
+        "foundry",
+        "market",
+        "school"
+      ]
+    },
+    {
+      "pop": 50,
+      "name": "殖民都会",
+      "desc": "工业与研究能力完整。",
+      "unlock": [
+        "lab",
+        "barracks",
+        "power"
+      ]
+    },
+    {
+      "pop": 80,
+      "name": "星区首府",
+      "desc": "足以支撑跨星系远征。",
+      "unlock": [
+        "entertain",
+        "water"
+      ]
+    }
+  ],
+  "TOWN_BUILDING": {
+    "HAB": "hab",
+    "FARM": "farm",
+    "MINE": "mine",
+    "FOUNDRY": "foundry",
+    "CLINIC": "clinic",
+    "SCHOOL": "school",
+    "MARKET": "market",
+    "BARRACKS": "barracks",
+    "LAB": "lab",
+    "POWER": "power",
+    "WATER": "water",
+    "ENTERTAIN": "entertain",
+    "WORKSHOP": "workshop"
+  },
+  "TOWN_BUILDING_DEF": {
+    "hab": {
+      "id": "hab",
+      "name": "居住区",
+      "icon": "⌂",
+      "popCap": 6,
+      "cost": {
+        "metal": 60,
+        "gold": 40
+      },
+      "jobs": 0,
+      "desc": "人口上限 +6。人口是殖民地一切产出的源头。"
+    },
+    "farm": {
+      "id": "farm",
+      "name": "农业区",
+      "icon": "❋",
+      "popCap": 0,
+      "cost": {
+        "metal": 50,
+        "gold": 30
+      },
+      "jobs": 3,
+      "produce": {
+        "food": 0.5
+      },
+      "desc": "每名工人每秒产 0.5 食物。"
+    },
+    "mine": {
+      "id": "mine",
+      "name": "采掘场",
+      "icon": "⛏",
+      "popCap": 0,
+      "cost": {
+        "metal": 80,
+        "gold": 55
+      },
+      "jobs": 3,
+      "produce": {
+        "metal": 0.4
+      },
+      "desc": "每名工人每秒产 0.4 金属。"
+    },
+    "foundry": {
+      "id": "foundry",
+      "name": "冶炼厂",
+      "icon": "⚒",
+      "popCap": 0,
+      "cost": {
+        "metal": 110,
+        "gold": 80
+      },
+      "jobs": 3,
+      "produce": {
+        "metal": 0.3,
+        "parts": 0.05
+      },
+      "desc": "把矿石变成零件。"
+    },
+    "clinic": {
+      "id": "clinic",
+      "name": "医疗中心",
+      "icon": "✚",
+      "popCap": 0,
+      "cost": {
+        "metal": 90,
+        "gold": 70
+      },
+      "jobs": 2,
+      "heal": 2.2,
+      "desc": "提升基地范围内的治疗速度，并降低人口死亡率。"
+    },
+    "school": {
+      "id": "school",
+      "name": "培训学校",
+      "icon": "✎",
+      "popCap": 0,
+      "cost": {
+        "metal": 100,
+        "gold": 90
+      },
+      "jobs": 2,
+      "researchRate": 0.6,
+      "desc": "每秒产 0.6 研究资料，用于实验科技。"
+    },
+    "market": {
+      "id": "market",
+      "name": "贸易市场",
+      "icon": "⇄",
+      "popCap": 0,
+      "cost": {
+        "metal": 80,
+        "gold": 100
+      },
+      "jobs": 2,
+      "produce": {
+        "gold": 0.5
+      },
+      "desc": "每名工人每秒产 0.5 金币。"
+    },
+    "barracks": {
+      "id": "barracks",
+      "name": "民兵营",
+      "icon": "⚔",
+      "popCap": 0,
+      "cost": {
+        "metal": 120,
+        "gold": 90
+      },
+      "jobs": 3,
+      "defense": 12,
+      "desc": "怪潮时人口会拿起武器协防（每名工人 +12 基地攻击力）。"
+    },
+    "lab": {
+      "id": "lab",
+      "name": "研究所",
+      "icon": "✦",
+      "popCap": 0,
+      "cost": {
+        "metal": 140,
+        "gold": 120,
+        "crystal": 40
+      },
+      "jobs": 3,
+      "researchRate": 1.2,
+      "desc": "大幅提升研究产出，并提高实验科技选项质量。"
+    },
+    "power": {
+      "id": "power",
+      "name": "发电站",
+      "icon": "⚡",
+      "popCap": 0,
+      "cost": {
+        "metal": 130,
+        "gold": 100
+      },
+      "jobs": 2,
+      "power": 3,
+      "desc": "为吸引阵列供能，降低燃料消耗。"
+    },
+    "water": {
+      "id": "water",
+      "name": "水处理厂",
+      "icon": "◌",
+      "popCap": 0,
+      "cost": {
+        "metal": 90,
+        "gold": 60
+      },
+      "jobs": 2,
+      "produce": {
+        "water": 0.6
+      },
+      "desc": "产冷凝水，也提升人口健康度。"
+    },
+    "entertain": {
+      "id": "entertain",
+      "name": "娱乐中心",
+      "icon": "♫",
+      "popCap": 0,
+      "cost": {
+        "metal": 90,
+        "gold": 110
+      },
+      "jobs": 2,
+      "morale": 0.3,
+      "desc": "提升士气：人口增长 +30%，工人效率 +15%。"
+    },
+    "workshop": {
+      "id": "workshop",
+      "name": "军械工坊",
+      "icon": "⚒",
+      "popCap": 0,
+      "cost": {
+        "metal": 120,
+        "gold": 90,
+        "parts": 14
+      },
+      "jobs": 2,
+      "craft": true,
+      "desc": "制造护甲与武器。能造什么品质由城镇等级决定，最高紫色 —— 红色只能靠打。"
+    }
+  }
+}

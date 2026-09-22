@@ -1,0 +1,384 @@
+{
+  "BINDABLE_ACTIONS": [
+    {
+      "action": "up",
+      "label": "向上移动",
+      "group": "移动",
+      "hint": "默认 W / ↑"
+    },
+    {
+      "action": "down",
+      "label": "向下移动",
+      "group": "移动",
+      "hint": "默认 S / ↓"
+    },
+    {
+      "action": "left",
+      "label": "向左移动",
+      "group": "移动",
+      "hint": "默认 A / ←"
+    },
+    {
+      "action": "right",
+      "label": "向右移动",
+      "group": "移动",
+      "hint": "默认 D / →"
+    },
+    {
+      "action": "sprint",
+      "label": "冲刺",
+      "group": "移动",
+      "hint": "按住消耗体力"
+    },
+    {
+      "action": "dodge",
+      "label": "闪避翻滚",
+      "group": "移动",
+      "hint": "有无敌帧"
+    },
+    {
+      "action": "vehicle",
+      "label": "上 / 下车 · 交互",
+      "group": "移动",
+      "hint": "也用于遗迹交互"
+    },
+    {
+      "action": "interact",
+      "label": "采集 / 维修",
+      "group": "战斗",
+      "hint": "按住生效"
+    },
+    {
+      "action": "reload",
+      "label": "装填弹药",
+      "group": "战斗"
+    },
+    {
+      "action": "swapWeapon",
+      "label": "切换武器",
+      "group": "战斗"
+    },
+    {
+      "action": "takeover",
+      "label": "接管炮塔",
+      "group": "战斗",
+      "hint": "再按一次交还"
+    },
+    {
+      "action": "heal",
+      "label": "使用医疗包",
+      "group": "战斗"
+    },
+    {
+      "action": "collect",
+      "label": "拾取 / 自动收集",
+      "group": "战斗"
+    },
+    {
+      "action": "ping",
+      "label": "呼叫怪潮",
+      "group": "战斗",
+      "hint": "需同时按住冲刺"
+    },
+    {
+      "action": "slot1",
+      "label": "快捷栏 1（武器）",
+      "group": "战斗"
+    },
+    {
+      "action": "slot2",
+      "label": "快捷栏 2（武器）",
+      "group": "战斗"
+    },
+    {
+      "action": "slot3",
+      "label": "快捷栏 3（武器）",
+      "group": "战斗"
+    },
+    {
+      "action": "slot4",
+      "label": "快捷栏 4（武器）",
+      "group": "战斗"
+    },
+    {
+      "action": "slot5",
+      "label": "快捷栏 5（弹药装填）",
+      "group": "战斗"
+    },
+    {
+      "action": "slot6",
+      "label": "快捷栏 6（医疗包）",
+      "group": "战斗"
+    },
+    {
+      "action": "slot7",
+      "label": "快捷栏 7（兴奋剂）",
+      "group": "战斗"
+    },
+    {
+      "action": "slot8",
+      "label": "快捷栏 8（维修套件）",
+      "group": "战斗"
+    },
+    {
+      "action": "build",
+      "label": "建造与空投",
+      "group": "界面"
+    },
+    {
+      "action": "tech",
+      "label": "科技树",
+      "group": "界面"
+    },
+    {
+      "action": "town",
+      "label": "城镇经营",
+      "group": "界面"
+    },
+    {
+      "action": "experiments",
+      "label": "实验科技",
+      "group": "界面"
+    },
+    {
+      "action": "inventory",
+      "label": "装备与背包",
+      "group": "界面"
+    },
+    {
+      "action": "map",
+      "label": "行星地图",
+      "group": "界面"
+    },
+    {
+      "action": "pause",
+      "label": "暂停 / 关闭面板",
+      "group": "界面"
+    },
+    {
+      "action": "screenshot",
+      "label": "截图",
+      "group": "界面"
+    }
+  ],
+  "DEFAULT_BINDS": {
+    "up": [
+      "KeyW",
+      "ArrowUp"
+    ],
+    "down": [
+      "KeyS",
+      "ArrowDown"
+    ],
+    "left": [
+      "KeyA",
+      "ArrowLeft"
+    ],
+    "right": [
+      "KeyD",
+      "ArrowRight"
+    ],
+    "sprint": [
+      "ShiftLeft",
+      "ShiftRight"
+    ],
+    "dodge": [
+      "Space"
+    ],
+    "vehicle": [
+      "KeyF"
+    ],
+    "interact": [
+      "KeyE"
+    ],
+    "reload": [
+      "KeyR"
+    ],
+    "swapWeapon": [
+      "KeyQ"
+    ],
+    "takeover": [
+      "KeyC"
+    ],
+    "heal": [
+      "KeyH"
+    ],
+    "collect": [
+      "KeyX"
+    ],
+    "ping": [
+      "KeyZ"
+    ],
+    "slot1": [
+      "Digit1"
+    ],
+    "slot2": [
+      "Digit2"
+    ],
+    "slot3": [
+      "Digit3"
+    ],
+    "slot4": [
+      "Digit4"
+    ],
+    "slot5": [
+      "Digit5"
+    ],
+    "slot6": [
+      "Digit6"
+    ],
+    "slot7": [
+      "Digit7"
+    ],
+    "slot8": [
+      "Digit8"
+    ],
+    "build": [
+      "KeyB"
+    ],
+    "tech": [
+      "KeyT"
+    ],
+    "town": [
+      "KeyG"
+    ],
+    "experiments": [
+      "KeyV"
+    ],
+    "inventory": [
+      "Tab"
+    ],
+    "map": [
+      "KeyM"
+    ],
+    "pause": [
+      "Escape"
+    ],
+    "screenshot": [
+      "KeyP"
+    ]
+  },
+  "DEFAULT_DISPLAY": {
+    "mode": "window",
+    "windowSize": "auto",
+    "uiScale": "auto",
+    "showFps": false
+  },
+  "DEFAULT_GAMEPLAY": {
+    "damageNumbers": true,
+    "screenShake": true,
+    "autoCollect": false,
+    "lootToasts": true
+  },
+  "settings": {
+    "binds": {
+      "up": [
+        "KeyW",
+        "ArrowUp"
+      ],
+      "down": [
+        "KeyS",
+        "ArrowDown"
+      ],
+      "left": [
+        "KeyA",
+        "ArrowLeft"
+      ],
+      "right": [
+        "KeyD",
+        "ArrowRight"
+      ],
+      "sprint": [
+        "ShiftLeft",
+        "ShiftRight"
+      ],
+      "dodge": [
+        "Space"
+      ],
+      "vehicle": [
+        "KeyF"
+      ],
+      "interact": [
+        "KeyE"
+      ],
+      "reload": [
+        "KeyR"
+      ],
+      "swapWeapon": [
+        "KeyQ"
+      ],
+      "takeover": [
+        "KeyC"
+      ],
+      "heal": [
+        "KeyH"
+      ],
+      "collect": [
+        "KeyX"
+      ],
+      "ping": [
+        "KeyZ"
+      ],
+      "slot1": [
+        "Digit1"
+      ],
+      "slot2": [
+        "Digit2"
+      ],
+      "slot3": [
+        "Digit3"
+      ],
+      "slot4": [
+        "Digit4"
+      ],
+      "slot5": [
+        "Digit5"
+      ],
+      "slot6": [
+        "Digit6"
+      ],
+      "slot7": [
+        "Digit7"
+      ],
+      "slot8": [
+        "Digit8"
+      ],
+      "build": [
+        "KeyB"
+      ],
+      "tech": [
+        "KeyT"
+      ],
+      "town": [
+        "KeyG"
+      ],
+      "experiments": [
+        "KeyV"
+      ],
+      "inventory": [
+        "Tab"
+      ],
+      "map": [
+        "KeyM"
+      ],
+      "pause": [
+        "Escape"
+      ],
+      "screenshot": [
+        "KeyP"
+      ]
+    },
+    "display": {
+      "mode": "window",
+      "windowSize": "auto",
+      "uiScale": "auto",
+      "showFps": false
+    },
+    "gameplay": {
+      "damageNumbers": true,
+      "screenShake": true,
+      "autoCollect": false,
+      "lootToasts": true
+    }
+  }
+}

@@ -1,0 +1,384 @@
+/**
+ * 武器 / 装备 / 词缀。
+ * 装备是野外精英怪和废弃基地的主要产出，也是「越级探索」的核心动力。
+ */
+
+/**
+ * 品质：白 / 绿 / 黄 / 紫 / 红。
+ *
+ * 内部 id 沿用原来的 common…relic（存档兼容），但展示与规则按五档来：
+ *   common   白  随处可见
+ *   uncommon 绿  普通掉落
+ *   rare     黄  精英怪主力产出
+ *   epic     紫  城镇能造的最高档
+ *   relic    红  ★ 只能从 Boss / 废弃基地 / 虫巢深处拿到，且必带一条特殊效果
+ *
+ * colorName 是中文色名，用于 UI 上标注「白色装备」这类说法。
+ */
+export const RARITY = {
+  COMMON: 'common',
+  UNCOMMON: 'uncommon',
+  RARE: 'rare',
+  EPIC: 'epic',
+  LEGENDARY: 'legendary',
+  RELIC: 'relic',        // 红色品质（游戏内最高档）
+};
+
+/** 五档品质的顺序，从低到高 */
+export const RARITY_ORDER = ['common', 'uncommon', 'rare', 'epic', 'relic'];
+
+/** 品质对应的「色名」中文（UI 里用） */
+export const RARITY_DEF = {
+  common:    { name: '普通', color: '#d8e6f5', colorName: '白', mult: 1.0,  affixes: 0, weight: 100 },
+  uncommon:  { name: '精良', color: '#6ee7a8', colorName: '绿', mult: 1.18, affixes: 1, weight: 52 },
+  rare:      { name: '稀有', color: '#ffd24c', colorName: '黄', mult: 1.42, affixes: 2, weight: 22 },
+  epic:      { name: '史诗', color: '#c08cff', colorName: '紫', mult: 1.75, affixes: 3, weight: 7 },
+  // 红色品质：weight 0 = 绝不参与普通随机，只能由明确写了「红色掉落」的渠道给
+  relic:     { name: '传奇', color: '#ff4c5f', colorName: '红', mult: 2.4,  affixes: 4, weight: 0, red: true },
+  // 兼容旧 id：传说并入红色档，不再单独出现
+  legendary: { name: '传奇', color: '#ff4c5f', colorName: '红', mult: 2.2,  affixes: 4, weight: 1.6 },
+};
+
+/** 城镇能制造的最高品质（红装只能靠打） */
+export const TOWN_MAX_RARITY = 'epic';
+
+/**
+ * 红色品质装备的特殊效果池。
+ *
+ * 规则：红色装备**必定**带一条，且这条效果是「改变玩法」而不是「再加一点数值」——
+ * 否则红装只是数字更大的紫装，玩家不会为它兴奋。
+ * 这些 key 由 systems/stats.js 解释（mechanics 或数值都会生效）。
+ */
+export const RED_EFFECTS = [
+  { id: 'red_vampire', name: '血偿', desc: '造成伤害的 6% 转化为生命。', effect: { lifeSteal: 0.06 } },
+  { id: 'red_thorn', name: '棘冠', desc: '反弹 22 点伤害给近战攻击者。', effect: { thorn: 22 } },
+  { id: 'red_phase', name: '相位残影', desc: '闪避冷却 -40%，闪避时留下伤害残影。', effect: { dodgeCdMult: -0.4, dodgeDamage: 30 } },
+  { id: 'red_overcharge', name: '过载核心', desc: '击杀后 3 秒内攻速 +60%。', effect: { killFrenzy: 3, killFrenzySpeed: 0.0, overcharge: 1 } },
+  { id: 'red_bulwark', name: '移动堡垒', desc: '静止 2 秒后获得 40 点护盾，移动后失效。', effect: { staticShield: 40 } },
+  { id: 'red_scavenger', name: '拾荒者之赐', desc: '掉落品质 +55%，自动收集范围 +220。', effect: { lootQuality: 0.55, autoCollectRadius: 220 } },
+  { id: 'red_swarm', name: '虫群威压', desc: '附近每只敌人让你伤害 +4%（最多 +40%）。', effect: { swarmDamage: 0.04 } },
+  { id: 'red_engine', name: '永动引擎', desc: '载具速度 +25%，且行驶时缓慢回复燃料。', effect: { vehicleSpeedMult: 0.25, fuelRegen: 0.6 } },
+];
+
+/** 武器类型：决定手感与适用场景 */
+export const WEAPON = {
+  // 近战
+  WRENCH: 'wrench',
+  BLADE: 'blade',
+  HAMMER: 'hammer',
+  PHASE_HAMMER: 'phaseHammer',
+  // 枪械
+  PISTOL: 'pistol',
+  SMG: 'smg',
+  RIFLE: 'rifle',
+  SHOTGUN: 'shotgun',
+  RAILGUN: 'railgun',
+  NAILGUN: 'nailgun',
+  BREACHER: 'breacher',
+  // 特殊
+  INJECTOR: 'injector',
+  SPORNE_LAUNCHER: 'sporeLauncher',
+  FLAME: 'flame',
+  // 载具挂载
+  V_TURRET: 'vTurret',
+  V_MISSILE: 'vMissile',
+  V_ARC: 'vArc',
+};
+
+/**
+ * damage: 单次伤害基准
+ * cd: 攻击间隔（秒）
+ * range: 有效射程（近战=挥击距离）
+ * kind: melee | projectile | beam | cone | lob | chain
+ * exclusive: 角色专属
+ */
+export const WEAPON_DEF = {
+  // ---------------- 近战 ----------------
+  [WEAPON.WRENCH]: {
+    id: WEAPON.WRENCH, name: '工程扳手', kind: 'melee', subtype: 'blunt',
+    damage: 13, cd: 0.52, range: 58, arc: 0.9, knockback: 130, color: '#9aa4b0', icon: '🔧',
+    desc: '工程师标配。对建筑拆卸速度 +80%，也能敲开怪物的壳。',
+    tags: ['starter'], bonus: { buildSpeed: 0.8 },
+  },
+  [WEAPON.BLADE]: {
+    id: WEAPON.BLADE, name: '开荒砍刀', kind: 'melee', subtype: 'blade',
+    damage: 17, cd: 0.44, range: 66, arc: 0.95, knockback: 90, color: '#d8d0c0', icon: '🗡',
+    desc: '【开拓者专属】轻快可靠。连续命中同一目标时伤害递增。',
+    exclusive: 'pioneer', tags: ['starter', 'exclusive'],
+    combo: { per: 0.12, max: 0.6 },
+  },
+  [WEAPON.HAMMER]: {
+    id: WEAPON.HAMMER, name: '重力战锤', kind: 'melee', subtype: 'blunt',
+    damage: 44, cd: 1.05, range: 76, arc: 1.5, knockback: 300, color: '#c08cff', icon: '🔨',
+    desc: '慢但重。命中时产生震荡波，对周围敌人造成 40% 溅射。',
+    splash: { radius: 92, mult: 0.4 }, stagger: 0.6,
+  },
+  [WEAPON.PHASE_HAMMER]: {
+    id: WEAPON.PHASE_HAMMER, name: '相位战锤', kind: 'melee', subtype: 'blunt',
+    damage: 62, cd: 0.92, range: 84, arc: 1.7, knockback: 340, color: '#ff9a4c', icon: '⚒',
+    desc: '【开拓者专属】挥击时短暂相位化，无视护甲并穿过地形。',
+    exclusive: 'pioneer', ignoreArmor: true, splash: { radius: 110, mult: 0.5 },
+    tags: ['exclusive'],
+  },
+  // ---------------- 枪械 ----------------
+  [WEAPON.PISTOL]: {
+    id: WEAPON.PISTOL, name: '拓荒手枪', kind: 'projectile', subtype: 'gun',
+    damage: 15, cd: 0.30, range: 400, speed: 780, spread: 0.035, pellets: 1, color: '#d0c090', icon: '🔫',
+    desc: '平衡的入门枪械，弹药消耗低。', ammoPerShot: 1, tags: ['starter'],
+  },
+  [WEAPON.SMG]: {
+    id: WEAPON.SMG, name: '蜂鸣冲锋枪', kind: 'projectile', subtype: 'gun',
+    damage: 9, cd: 0.105, range: 340, speed: 820, spread: 0.085, pellets: 1, color: '#6ee7a8', icon: '🔫',
+    desc: '高射速、低单发。近距离压制虫群极强，但很吃弹药。', ammoPerShot: 1,
+    tags: ['starter'],
+  },
+  [WEAPON.RIFLE]: {
+    id: WEAPON.RIFLE, name: '长管步枪', kind: 'projectile', subtype: 'gun',
+    damage: 38, cd: 0.62, range: 620, speed: 1150, spread: 0.012, pellets: 1, color: '#59d8ff', icon: '🔫',
+    desc: '远距离点名精英怪。穿透 1 个目标。', pierce: 1, ammoPerShot: 1,
+  },
+  [WEAPON.SHOTGUN]: {
+    id: WEAPON.SHOTGUN, name: '碎壳霰弹', kind: 'projectile', subtype: 'gun',
+    damage: 11, cd: 0.78, range: 250, speed: 700, spread: 0.24, pellets: 7, color: '#ffba4c', icon: '🔫',
+    desc: '贴脸最强。每颗弹丸独立结算，打大体型怪伤害爆炸。', ammoPerShot: 1,
+  },
+  [WEAPON.BREACHER]: {
+    id: WEAPON.BREACHER, name: '破城者霰弹枪', kind: 'projectile', subtype: 'gun',
+    damage: 17, cd: 0.66, range: 300, speed: 760, spread: 0.20, pellets: 9, color: '#ff5f6d', icon: '💥',
+    desc: '【开拓者专属】初始武器。每颗弹丸都带击退，能把虫群整片推回去。',
+    exclusive: 'pioneer', knockbackPerPellet: 90, tags: ['starter', 'exclusive'], ammoPerShot: 1,
+  },
+  [WEAPON.RAILGUN]: {
+    id: WEAPON.RAILGUN, name: '磁轨穿刺枪', kind: 'beam', subtype: 'gun',
+    damage: 96, cd: 1.25, range: 780, color: '#8fe0ff', icon: '⚡',
+    desc: '蓄力后打出一条贯穿光束，无视护甲。对成排敌人收益最高。',
+    pierce: 99, ignoreArmor: false, chargeTime: 0.45, ammoPerShot: 3,
+  },
+  [WEAPON.NAILGUN]: {
+    id: WEAPON.NAILGUN, name: '贯穿钉枪', kind: 'projectile', subtype: 'gun',
+    damage: 22, cd: 0.34, range: 480, speed: 950, spread: 0.05, pellets: 1, color: '#c08cff', icon: '📌',
+    desc: '【开拓者专属】钉子会钉住目标，使其减速 40%，可叠 3 层。',
+    exclusive: 'pioneer', pierce: 2, slow: { amount: 0.4, dur: 3, max: 3 }, tags: ['exclusive'], ammoPerShot: 1,
+  },
+  // ---------------- 特殊 ----------------
+  [WEAPON.INJECTOR]: {
+    id: WEAPON.INJECTOR, name: '基因注射枪', kind: 'projectile', subtype: 'special',
+    damage: 12, cd: 0.4, range: 300, speed: 640, spread: 0.05, pellets: 1, color: '#7de0a0', icon: '💉',
+    desc: '【生物学家】命中叠加【标记】：目标受到的所有伤害 +12%，可叠 5 层；击杀标记目标回血。',
+    exclusive: 'biologist', mark: { per: 0.12, max: 5, dur: 8, healOnKill: 6 }, tags: ['starter', 'exclusive'], ammoPerShot: 1,
+  },
+  [WEAPON.SPORNE_LAUNCHER]: {
+    id: WEAPON.SPORNE_LAUNCHER, name: '孢子迫击炮', kind: 'lob', subtype: 'special',
+    damage: 34, cd: 1.15, range: 420, color: '#c58fd8', icon: '☣',
+    desc: '抛射孢子云，落点持续 5 秒造成范围伤害并降低敌人护甲。',
+    cloud: { radius: 88, dps: 14, dur: 5, armorDebuff: 6 }, ammoPerShot: 2,
+  },
+  [WEAPON.FLAME]: {
+    id: WEAPON.FLAME, name: '等离子喷焰器', kind: 'cone', subtype: 'special',
+    damage: 26, cd: 0.12, range: 170, arc: 0.55, color: '#ff7a4c', icon: '🔥',
+    desc: '锥形持续灼烧，对密集虫群效率极高，但需要贴近。',
+    burn: { dps: 9, dur: 3, max: 3 }, ammoPerShot: 0.15,
+  },
+  // ---------------- 载具挂载 ----------------
+  [WEAPON.V_TURRET]: {
+    id: WEAPON.V_TURRET, name: '车载机枪塔', kind: 'projectile', subtype: 'vehicle', mounted: true,
+    damage: 14, cd: 0.22, range: 380, speed: 900, spread: 0.06, pellets: 1, color: '#9aa4b0', icon: '🛡',
+    desc: '自动索敌，边开车边清路。', auto: true, ammoPerShot: 1,
+  },
+  [WEAPON.V_MISSILE]: {
+    id: WEAPON.V_MISSILE, name: '车载导弹巢', kind: 'lob', subtype: 'vehicle', mounted: true,
+    damage: 52, cd: 2.2, range: 620, color: '#ff9a4c', icon: '🚀',
+    desc: '锁定后发射追踪导弹，范围爆炸。', homing: true, splash: { radius: 110, mult: 1 }, auto: true, ammoPerShot: 2,
+  },
+  [WEAPON.V_ARC]: {
+    id: WEAPON.V_ARC, name: '车载电弧发生器', kind: 'chain', subtype: 'vehicle', mounted: true,
+    damage: 30, cd: 0.9, range: 260, color: '#59d8ff', icon: '⚡',
+    desc: '电链在 5 个目标间跳跃，每次跳跃伤害 -15%。', chains: 5, chainFalloff: 0.85, auto: true, ammoPerShot: 1,
+  },
+};
+
+/** 初始武器白名单（开局给的东西） */
+export const STARTER_WEAPONS = [WEAPON.WRENCH, WEAPON.BLADE, WEAPON.PISTOL, WEAPON.SMG, WEAPON.INJECTOR];
+
+// =========================================================
+//  装备（护甲/饰品）
+// =========================================================
+
+export const SLOT = {
+  HELMET: 'helmet',      // 头盔
+  CHEST: 'chest',        // 胸甲
+  LEGS: 'legs',          // 护腿
+  TRINKET: 'trinket',
+  MODULE: 'module',      // 载具模块
+};
+
+export const SLOT_DEF = {
+  helmet: { name: '头盔', icon: '⛑', count: 1 },
+  chest: { name: '胸甲', icon: '🦺', count: 1 },
+  legs: { name: '护腿', icon: '👖', count: 1 },
+  trinket: { name: '饰品', icon: '💠', count: 2 },
+  module: { name: '载具模块', icon: '⚙', count: 3 },
+};
+
+/** 装备栏的固定顺序：护甲三件 + 饰品两件（存档里就是这个数组） */
+export const EQUIP_ORDER = ['helmet', 'chest', 'legs', 'trinket', 'trinket'];
+export const EQUIP_SLOTS = EQUIP_ORDER.length;
+
+/**
+ * 换弹时间（秒）。
+ *
+ * 按武器类型给基准值，再按品质打折 —— 同一把枪，紫色比白色换得快，
+ * 这样「抽到高品质」在换弹这个维度上也有实感（不只是数字大一点）。
+ * 单件武器可以用 def.reloadTime 覆盖。
+ */
+export const RELOAD_BY_WEAPON = {
+  pistol: 1.20,
+  smg: 1.85,
+  rifle: 1.55,
+  shotgun: 1.75,
+  breacher: 1.80,
+  railgun: 2.60,
+  nailgun: 1.40,
+  injector: 1.30,
+  sporeLauncher: 2.20,
+  flame: 1.70,
+  vTurret: 2.00,
+  vMissile: 3.00,
+  vArc: 2.20,
+};
+
+export const RARITY_RELOAD = {
+  common: 1.00,
+  uncommon: 0.95,
+  rare: 0.90,
+  epic: 0.85,
+  relic: 0.78,
+  legendary: 0.85,   // 旧档兼容
+};
+
+/** 某把武器 + 某品质的换弹时间 */
+export function reloadTimeOf(weaponDef, rarity = 'common') {
+  if (!weaponDef) return 1.6;
+  const base = weaponDef.reloadTime ?? RELOAD_BY_WEAPON[weaponDef.id] ?? 1.6;
+  const mult = RARITY_RELOAD[rarity] ?? 1;
+  return Math.max(0.5, Math.round(base * mult * 100) / 100);
+}
+
+export const EQUIP_DEF = {
+  // ---- 头盔 ----
+  fieldCap:   { id: 'fieldCap', name: '侦察头盔', slot: SLOT.HELMET, icon: '⛑', tier: 0,
+    stats: { armor: 2, hpMax: 6, sightBonus: 40 }, desc: '降落时配发的标准头盔。视野好一点。' },
+  scrapHelm:  { id: 'scrapHelm', name: '废铁头盔', slot: SLOT.HELMET, icon: '⛑', tier: 1,
+    stats: { armor: 5, hpMax: 14 }, desc: '蒙皮敲出来的，能挡一下是一下。' },
+  carapaceHelm: { id: 'carapaceHelm', name: '甲壳头盔', slot: SLOT.HELMET, icon: '⛑', tier: 2,
+    stats: { armor: 9, hpMax: 22 }, desc: '虫壳压制的头盔，硬且不重。' },
+  phaseHelm:  { id: 'phaseHelm', name: '相位头盔', slot: SLOT.HELMET, icon: '⛑', tier: 3,
+    stats: { armor: 11, hpMax: 26, sightBonus: 120 }, desc: '带夜视叠加层的头盔，晚上也看得清。' },
+  titanHelm:  { id: 'titanHelm', name: '泰坦头盔', slot: SLOT.HELMET, icon: '🛡', tier: 4,
+    stats: { armor: 18, hpMax: 44, thorn: 4 }, desc: '重装头盔。撞上来的虫子自己吃亏。' },
+
+  // ---- 胸甲 ----
+  // 开局护甲（白色）：让「装备护甲」这件事从一开始就成立
+  fieldJacket: { id: 'fieldJacket', name: '简易护甲', slot: SLOT.CHEST, icon: '🦺', tier: 0,
+    stats: { armor: 4, hpMax: 12 }, desc: '降落时配发的标准护甲。聊胜于无，但比没有强。' },
+  scrapVest:   { id: 'scrapVest', name: '废铁背心', slot: SLOT.CHEST, icon: '🦺', tier: 1,
+    stats: { armor: 6, hpMax: 25 }, desc: '用飞船蒙皮敲出来的，能挡一下是一下。' },
+  carapaceRig: { id: 'carapaceRig', name: '甲壳外骨骼', slot: SLOT.CHEST, icon: '🦺', tier: 2,
+    stats: { armor: 14, hpMax: 40, speedMult: -0.04 }, desc: '虫壳缝合的护具，硬但沉。' },
+  hazmatSuit:  { id: 'hazmatSuit', name: '防化服', slot: SLOT.CHEST, icon: '🥼', tier: 2,
+    stats: { armor: 8, hpMax: 20, acidResist: 0.6, sporeResist: 0.7 }, desc: '孢子沼泽与酸沼的通行证。' },
+  thermalRig:  { id: 'thermalRig', name: '绝热动力甲', slot: SLOT.CHEST, icon: '🦺', tier: 3,
+    stats: { armor: 18, hpMax: 60, heatResist: 0.5, coldResist: 0.5, speedMult: -0.02 }, desc: '灰原与冰川都能扛。' },
+  titanPlate:  { id: 'titanPlate', name: '泰坦复合板', slot: SLOT.CHEST, icon: '🛡', tier: 4,
+    stats: { armor: 30, hpMax: 110, speedMult: -0.08, thorn: 10 }, desc: '重装。靠近你的怪会自己撞伤。' },
+  aegisShell:  { id: 'aegisShell', name: '神盾壳层', slot: SLOT.CHEST, icon: '🛡', tier: 5,
+    stats: { armor: 42, hpMax: 165, speedMult: -0.06, thorn: 18, hazardResist: 0.35 },
+    desc: '殖民地能造出的最好护甲：厚、慢、几乎打不动。' },
+
+  // ---- 护腿 ----
+  fieldGreaves: { id: 'fieldGreaves', name: '简易护腿', slot: SLOT.LEGS, icon: '👖', tier: 0,
+    stats: { armor: 2, hpMax: 4, speedMult: 0.02 }, desc: '轻便的护腿，跑起来不累。' },
+  scrapGreaves: { id: 'scrapGreaves', name: '拼装护腿', slot: SLOT.LEGS, icon: '👖', tier: 1,
+    stats: { armor: 5, hpMax: 12 }, desc: '几块钢板绑在腿上，丑但管用。' },
+  phaseWeave:  { id: 'phaseWeave', name: '相位纤维护腿', slot: SLOT.LEGS, icon: '👖', tier: 2,
+    stats: { armor: 7, hpMax: 16, dodgeCdMult: -0.25, speedMult: 0.08 }, desc: '轻得像没穿，闪避恢复快得多。' },
+  carapaceGreaves: { id: 'carapaceGreaves', name: '甲壳护腿', slot: SLOT.LEGS, icon: '👖', tier: 3,
+    stats: { armor: 12, hpMax: 28, speedMult: -0.02 }, desc: '虫壳护腿，膝盖不再怕扑咬。' },
+  titanGreaves: { id: 'titanGreaves', name: '泰坦护腿', slot: SLOT.LEGS, icon: '🛡', tier: 4,
+    stats: { armor: 16, hpMax: 36, hazardResist: 0.25 }, desc: '重装护腿，酸沼和火山灰都拦不住你。' },
+
+  // ---- 饰品 ----
+  miningCharm: { id: 'miningCharm', name: '矿工护符', slot: SLOT.TRINKET, icon: '💠', stats: { mineSpeed: 0.45, carryMult: 0.2 }, desc: '采集速度大幅提升。' },
+  huntersMark: { id: 'huntersMark', name: '猎手印记', slot: SLOT.TRINKET, icon: '💠', stats: { critChance: 0.09, critMult: 0.25 }, desc: '精英怪掉落的战利品。' },
+  swarmLure:   { id: 'swarmLure', name: '虫群诱饵', slot: SLOT.TRINKET, icon: '💠', stats: { damage: 0.12, armor: -5 }, desc: '让怪更想打你 —— 也让你打得更狠。' },
+  beaconTuner: { id: 'beaconTuner', name: '吸引调谐器', slot: SLOT.TRINKET, icon: '💠', stats: { beaconRadiusMult: 0.18, beaconFuelMult: -0.25 }, desc: '拉更远的怪，还省燃料。' },
+  coolantCoil: { id: 'coolantCoil', name: '冷却盘管', slot: SLOT.TRINKET, icon: '💠', stats: { attackSpeed: 0.18, vehicleSpeedMult: 0.15 }, desc: '枪管不过热，引擎也不过热。' },
+  medInjector: { id: 'medInjector', name: '医疗注射器', slot: SLOT.TRINKET, icon: '💠', stats: { hpRegen: 1.4, healPower: 0.5 }, desc: '战斗中缓慢自愈。' },
+  cargoHauler: { id: 'cargoHauler', name: '货运外挂', slot: SLOT.TRINKET, icon: '💠', stats: { carryMult: 0.5, vehicleSpeedMult: -0.08 }, desc: '一次能背更多东西回家。' },
+  geneSequencer: { id: 'geneSequencer', name: '基因测序仪', slot: SLOT.TRINKET, icon: '💠', stats: { dnaMult: 0.6, tameSpeed: 0.4 }, desc: '生物学家专属收益。' },
+  // ---- 载具模块 ----
+  engineBoost: { id: 'engineBoost', name: '涡轮增压器', slot: SLOT.MODULE, icon: '⚙', stats: { vehicleSpeedMult: 0.35 }, desc: '跑图快 35%。' },
+  armorPlating:{ id: 'armorPlating', name: '装甲板', slot: SLOT.MODULE, icon: '⚙', stats: { vehicleHpMult: 0.6 }, desc: '载具耐久大幅提升。' },
+  cargoPod:    { id: 'cargoPod', name: '货舱吊舱', slot: SLOT.MODULE, icon: '⚙', stats: { cargoBonus: 30 }, desc: '载具载重 +30。' },
+  fuelScoop:   { id: 'fuelScoop', name: '燃料采集器', slot: SLOT.MODULE, icon: '⚙', stats: { fuelMult: -0.5, fuelRegen: 0.8 }, desc: '行驶时缓慢回油。' },
+  ramProw:     { id: 'ramProw', name: '撞角', slot: SLOT.MODULE, icon: '⚙', stats: { ramMult: 1.2 }, desc: '撞击伤害翻倍。' },
+  droneBay:    { id: 'droneBay', name: '无人机舱', slot: SLOT.MODULE, icon: '⚙', stats: { autoRepair: 3 }, desc: '行驶中自动修复自身。' },
+};
+
+// =========================================================
+//  词缀
+// =========================================================
+
+/**
+ * stat 必须对应 stats.js 里认识的键。
+ * value 是 [min,max]，按稀有度倍率放大。
+ */
+export const AFFIX_DEF = [
+  { id: 'dmg',      name: '伤害',     stat: 'damage',        value: [0.06, 0.18], tags: ['weapon'] },
+  { id: 'atkSpd',   name: '攻速',     stat: 'attackSpeed',   value: [0.05, 0.15], tags: ['weapon'] },
+  { id: 'critC',    name: '暴击率',   stat: 'critChance',    value: [0.03, 0.09], tags: ['weapon'] },
+  { id: 'critD',    name: '暴击伤害', stat: 'critMult',      value: [0.12, 0.35], tags: ['weapon'] },
+  { id: 'range',    name: '射程',     stat: 'rangeMult',     value: [0.08, 0.22], tags: ['weapon'] },
+  { id: 'pierce',   name: '穿透',     stat: 'pierce',        value: [1, 2], int: true, tags: ['weapon'] },
+  { id: 'lifeSteal',name: '吸血',     stat: 'lifeSteal',     value: [0.02, 0.06], tags: ['weapon'] },
+  { id: 'kb',       name: '击退',     stat: 'knockbackMult', value: [0.2, 0.5], tags: ['weapon'] },
+  { id: 'hpMax',    name: '生命上限', stat: 'hpMax',         value: [12, 38], int: true },
+  { id: 'armor',    name: '护甲',     stat: 'armor',         value: [3, 9], int: true },
+  { id: 'regen',    name: '生命回复', stat: 'hpRegen',       value: [0.4, 1.2] },
+  { id: 'speed',    name: '移速',     stat: 'speedMult',     value: [0.04, 0.11] },
+  { id: 'dodgeCd',  name: '闪避冷却', stat: 'dodgeCdMult',   value: [-0.28, -0.10] },
+  { id: 'luck',     name: '幸运',     stat: 'luck',          value: [0.05, 0.16] },
+  { id: 'carry',    name: '负重',     stat: 'carryMult',     value: [0.15, 0.4] },
+  { id: 'goldFind', name: '金币加成', stat: 'goldMult',      value: [0.1, 0.3] },
+  { id: 'xpFind',   name: '经验加成', stat: 'xpMult',        value: [0.1, 0.28] },
+  { id: 'matFind',  name: '材料加成', stat: 'matMult',       value: [0.12, 0.32] },
+  { id: 'buildSpd', name: '建造速度', stat: 'buildSpeed',    value: [0.2, 0.55] },
+  { id: 'thorn',    name: '反伤',     stat: 'thorn',         value: [5, 16], int: true },
+  { id: 'acidRes',  name: '酸抗',     stat: 'acidResist',    value: [0.2, 0.45] },
+  { id: 'vehSpd',   name: '载具速度', stat: 'vehicleSpeedMult', value: [0.1, 0.3] },
+  { id: 'vehHp',    name: '载具耐久', stat: 'vehicleHpMult', value: [0.2, 0.5] },
+  { id: 'beacon',   name: '吸引范围', stat: 'beaconRadiusMult', value: [0.08, 0.22] },
+  { id: 'towerDmg', name: '防御塔伤害', stat: 'towerDamage', value: [0.1, 0.3], tags: ['support'] },
+  { id: 'towerRate',name: '防御塔攻速', stat: 'towerAttackSpeed', value: [0.08, 0.22], tags: ['support'] },
+];
+
+// =========================================================
+//  弹药与消耗品
+// =========================================================
+
+export const ITEM_DEF = {
+  ammo:        { id: 'ammo', name: '通用弹药', stack: 999, icon: '▪', desc: '所有枪械共用。', color: '#d0c090' },
+  medkit:      { id: 'medkit', name: '医疗包', stack: 10, icon: '✚', desc: '立即回复 45 点生命。', color: '#ff5f6d', use: { heal: 45 } },
+  stimpack:    { id: 'stimpack', name: '兴奋剂', stack: 10, icon: '⚡', desc: '10 秒内攻速 +40%、移速 +20%。', color: '#ffba4c', use: { buff: { attackSpeed: 0.4, speedMult: 0.2, dur: 10 } } },
+  repairKit:   { id: 'repairKit', name: '维修套件', stack: 20, icon: '🔧', desc: '瞬间修复建筑 240 点耐久。', color: '#6ee7a8', use: { repair: 240 } },
+  turretKit:   { id: 'turretKit', name: '塔基预制件', stack: 10, icon: '▣', desc: '免费部署一座哨戒炮台。', color: '#59d8ff', use: { deploy: 'sentry' } },
+  fuelCan:     { id: 'fuelCan', name: '燃料罐', stack: 20, icon: '⛽', desc: '为载具补充 60 点燃料。', color: '#ff9a4c', use: { fuel: 60 } },
+  beaconCell:  { id: 'beaconCell', name: '吸引阵列电池', stack: 10, icon: '◎', desc: '为吸引阵列补充 50 点能量。', color: '#ff7a4c', use: { beaconFuel: 50 } },
+  dnaVial:     { id: 'dnaVial', name: '基因样本瓶', stack: 20, icon: '⧫', desc: '立即获得 1 点生物科技点。', color: '#7de0a0', use: { bioPoint: 1 } },
+  flare:       { id: 'flare', name: '信号弹', stack: 10, icon: '✦', desc: '立刻把附近怪潮的注意力转向你。', color: '#ff5f6d', use: { taunt: 600 } },
+  recallChip:  { id: 'recallChip', name: '回城芯片', stack: 5, icon: '⇱', desc: '瞬间传送回基地。', color: '#59d8ff', use: { recall: true } },
+  scanner:     { id: 'scanner', name: '地形扫描仪', stack: 10, icon: '⌖', desc: '在地图上标记 1200 像素内的巢穴与遗迹。', color: '#c08cff', use: { scan: 1200 } },
+};
+
+/** 弹药消耗：每发子弹折算的金属/硫磺 */
+export const AMMO_COST = { metal: 0.12, sulfur: 0.05 };

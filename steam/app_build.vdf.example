@@ -1,0 +1,26 @@
+// Steam 构建脚本模板（app_build_<AppID>.vdf）
+//
+// 用法：
+//   1. 把 <AppID> 和 <DepotID> 换成 Steamworks 后台里的真实数字
+//   2. 复制成 steam/app_build_<AppID>.vdf
+//   3. steamcmd +login <账号> +run_app_build <绝对路径>\app_build_<AppID>.vdf +quit
+//
+// 上传前先跑 `npm run dist:dir`，并把 Steamworks 的 steam_api64.dll
+// 拷进 dist/win-unpacked/（见 STEAM-CHECKLIST.md）。
+
+"AppBuild"
+{
+	"AppID" "<AppID>"
+	"Desc" "Colony Frontier build"
+	// 每次上传都递增，Steam 用它区分构建版本
+	"BuildOutput" "..\\steam_build_output\\"
+	"ContentRoot" "..\\dist\\win-unpacked\\"
+	"SetLive" ""            // 留空 = 只上传不设为默认分支；填 "default" 会直接上线
+	"Preview" "0"
+
+	"Depots"
+	{
+		// Windows depot
+		"<DepotID>" "depot_build_windows.vdf"
+	}
+}

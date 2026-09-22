@@ -1,0 +1,141 @@
+﻿❌ src/core/game.js
+     saveManager  (行 50)
+     screenToCanvas  (行 205)
+❌ src/core/gamepad.js
+     idxStr  (行 316)
+     map  (行 316)
+     s  (行 572)
+❌ src/core/math.js
+     dy  (行 12)
+     x1  (行 60)
+     y1  (行 61)
+❌ src/core/noise.js
+     yf  (行 34)
+     v  (行 35)
+     freq  (行 46)
+     sum  (行 46)
+     norm  (行 46)
+     gy  (行 99)
+     by  (行 101)
+     px  (行 104)
+     py  (行 104)
+     dy  (行 105)
+❌ src/core/settings.js
+     other  (行 188)
+❌ src/data/crafting.js
+     v  (行 89)
+❌ src/main.js
+     settingsModule  (行 15)
+     modesModule  (行 16)
+     materialsModule  (行 17)
+     baseTy  (行 338)
+     bestD  (行 339)
+     ty  (行 342)
+     No  (行 646)
+     handler  (行 646)
+     registered  (行 646)
+     save  (行 646)
+     steam  (行 646)
+     Settings  (行 703)
+❌ src/render/renderer.js
+     rev  (行 130)
+     ty0  (行 142)
+     th  (行 240)
+     arr  (行 240)
+     ny  (行 242)
+     t1  (行 2224)
+❌ src/systems/director.js
+     v  (行 538)
+❌ src/systems/enemies.js
+     hpMax  (行 262)
+     bd  (行 483)
+     cy  (行 1147)
+❌ src/systems/loot.js
+     lo  (行 71)
+     hi  (行 71)
+     k  (行 543)
+     v  (行 543)
+❌ src/systems/player.js
+     PLAYER  (行 5)
+     VEHICLE  (行 5)
+     oy  (行 223)
+     bd  (行 531)
+     $  (行 652)
+     lo  (行 724)
+     hi  (行 724)
+❌ src/systems/projectiles.js
+     dy  (行 88)
+     remain  (行 204)
+❌ src/systems/runState.js
+     PLAYER  (行 8)
+     VEHICLE  (行 8)
+     jy  (行 294)
+     nests  (行 307)
+❌ src/systems/stats.js
+     remain  (行 251)
+❌ src/systems/towers.js
+     cy  (行 184)
+     bestScore  (行 296)
+     bd  (行 556)
+❌ src/systems/town.js
+     per  (行 198)
+     $  (行 263)
+     v  (行 327)
+❌ src/ui/actions.js
+     bd  (行 176)
+     VEHICLE_MELEE  (行 556)
+❌ src/ui/dom.js
+     jitterX  (行 265)
+❌ src/ui/gamepadHint.js
+     key  (行 119)
+     label  (行 119)
+❌ src/ui/hud.js
+     $  (行 207)
+     nd  (行 440)
+     hgt  (行 540)
+     g  (行 550)
+❌ src/ui/panelBuild.js
+     $  (行 83)
+❌ src/ui/panelDungeonMap.js
+     cy  (行 69)
+❌ src/ui/panelInventory.js
+     k  (行 187)
+     v  (行 187)
+❌ src/ui/panelPlanet.js
+     v  (行 53)
+❌ src/ui/panelSettings.js
+     v  (行 109)
+     $  (行 262)
+❌ src/ui/panelTech.js
+     k  (行 32)
+     $  (行 38)
+     fmtFn  (行 277)
+❌ src/ui/panelTown.js
+     $  (行 65)
+     v  (行 124)
+❌ src/ui/ui.js
+     characterId  (行 207)
+❌ src/world/dungeon.js
+     H  (行 53)
+     cleared  (行 171)
+❌ src/world/pathfind.js
+     NEIGHBOR_COST  (行 71)
+     mult  (行 71)
+     ty0  (行 91)
+     ny  (行 156)
+     bx  (行 190)
+     by  (行 190)
+     r  (行 248)
+❌ src/world/spatialHash.js
+     x1  (行 19)
+     y1  (行 20)
+     dy  (行 60)
+     bestD  (行 74)
+❌ src/world/world.js
+     dy  (行 92)
+     tail  (行 172)
+     total  (行 332)
+     ccx  (行 860)
+     val  (行 1013)
+
+⚠ 扫描到 106 处可疑的自由变量（含误报，仅供人工排查线索）

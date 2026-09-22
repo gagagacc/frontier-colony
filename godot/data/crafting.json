@@ -1,0 +1,254 @@
+{
+  "CRAFT_ARMOR": [
+    {
+      "kind": "equip",
+      "id": "fieldJacket",
+      "tier": 0,
+      "name": "简易护甲",
+      "icon": "🦺",
+      "slot": "chest"
+    },
+    {
+      "kind": "equip",
+      "id": "fieldCap",
+      "tier": 0,
+      "name": "侦察头盔",
+      "icon": "⛑",
+      "slot": "helmet"
+    },
+    {
+      "kind": "equip",
+      "id": "fieldGreaves",
+      "tier": 0,
+      "name": "简易护腿",
+      "icon": "👖",
+      "slot": "legs"
+    },
+    {
+      "kind": "equip",
+      "id": "scrapVest",
+      "tier": 1,
+      "name": "废铁背心",
+      "icon": "🦺",
+      "slot": "chest"
+    },
+    {
+      "kind": "equip",
+      "id": "scrapHelm",
+      "tier": 1,
+      "name": "废铁头盔",
+      "icon": "⛑",
+      "slot": "helmet"
+    },
+    {
+      "kind": "equip",
+      "id": "scrapGreaves",
+      "tier": 1,
+      "name": "拼装护腿",
+      "icon": "👖",
+      "slot": "legs"
+    },
+    {
+      "kind": "equip",
+      "id": "carapaceRig",
+      "tier": 2,
+      "name": "甲壳外骨骼",
+      "icon": "🦺",
+      "slot": "chest"
+    },
+    {
+      "kind": "equip",
+      "id": "hazmatSuit",
+      "tier": 2,
+      "name": "防化服",
+      "icon": "🥼",
+      "slot": "chest"
+    },
+    {
+      "kind": "equip",
+      "id": "carapaceHelm",
+      "tier": 2,
+      "name": "甲壳头盔",
+      "icon": "⛑",
+      "slot": "helmet"
+    },
+    {
+      "kind": "equip",
+      "id": "phaseWeave",
+      "tier": 2,
+      "name": "相位纤维护腿",
+      "icon": "👖",
+      "slot": "legs"
+    },
+    {
+      "kind": "equip",
+      "id": "thermalRig",
+      "tier": 3,
+      "name": "绝热动力甲",
+      "icon": "🦺",
+      "slot": "chest"
+    },
+    {
+      "kind": "equip",
+      "id": "phaseHelm",
+      "tier": 3,
+      "name": "相位头盔",
+      "icon": "⛑",
+      "slot": "helmet"
+    },
+    {
+      "kind": "equip",
+      "id": "carapaceGreaves",
+      "tier": 3,
+      "name": "甲壳护腿",
+      "icon": "👖",
+      "slot": "legs"
+    },
+    {
+      "kind": "equip",
+      "id": "titanPlate",
+      "tier": 4,
+      "name": "泰坦复合板",
+      "icon": "🛡",
+      "slot": "chest"
+    },
+    {
+      "kind": "equip",
+      "id": "titanHelm",
+      "tier": 4,
+      "name": "泰坦头盔",
+      "icon": "🛡",
+      "slot": "helmet"
+    },
+    {
+      "kind": "equip",
+      "id": "titanGreaves",
+      "tier": 4,
+      "name": "泰坦护腿",
+      "icon": "🛡",
+      "slot": "legs"
+    },
+    {
+      "kind": "equip",
+      "id": "aegisShell",
+      "tier": 5,
+      "name": "神盾壳层",
+      "icon": "🛡",
+      "slot": "chest"
+    }
+  ],
+  "CRAFT_MAX_RARITY": "epic",
+  "CRAFT_TIERS": [
+    {
+      "id": 0,
+      "name": "初级工坊",
+      "rarity": "common",
+      "pop": 0,
+      "costMult": 1,
+      "desc": "白色装备：能用，但只是能用。"
+    },
+    {
+      "id": 1,
+      "name": "标准工坊",
+      "rarity": "uncommon",
+      "pop": 6,
+      "costMult": 1.6,
+      "desc": "绿色装备：殖民地安定下来之后的标配。"
+    },
+    {
+      "id": 2,
+      "name": "精密工坊",
+      "rarity": "rare",
+      "pop": 16,
+      "costMult": 2.6,
+      "desc": "黄色装备：需要稳定的金属与零件供应。"
+    },
+    {
+      "id": 3,
+      "name": "高级军械库",
+      "rarity": "epic",
+      "pop": 30,
+      "costMult": 4.2,
+      "desc": "紫色装备：城镇能造出的最好东西。红色只能靠打。"
+    }
+  ],
+  "CRAFT_WEAPONS": [
+    {
+      "kind": "weapon",
+      "id": "wrench",
+      "name": "工程扳手",
+      "icon": "🔧",
+      "tags": [
+        "starter"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "blade",
+      "name": "开荒砍刀",
+      "icon": "🗡",
+      "tags": [
+        "starter",
+        "exclusive"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "hammer",
+      "name": "重力战锤",
+      "icon": "🔨",
+      "tags": []
+    },
+    {
+      "kind": "weapon",
+      "id": "pistol",
+      "name": "拓荒手枪",
+      "icon": "🔫",
+      "tags": [
+        "starter"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "smg",
+      "name": "蜂鸣冲锋枪",
+      "icon": "🔫",
+      "tags": [
+        "starter"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "rifle",
+      "name": "长管步枪",
+      "icon": "🔫",
+      "tags": []
+    },
+    {
+      "kind": "weapon",
+      "id": "shotgun",
+      "name": "碎壳霰弹",
+      "icon": "🔫",
+      "tags": []
+    },
+    {
+      "kind": "weapon",
+      "id": "nailgun",
+      "name": "贯穿钉枪",
+      "icon": "📌",
+      "tags": [
+        "exclusive"
+      ]
+    },
+    {
+      "kind": "weapon",
+      "id": "injector",
+      "name": "基因注射枪",
+      "icon": "💉",
+      "tags": [
+        "starter",
+        "exclusive"
+      ]
+    }
+  ]
+}

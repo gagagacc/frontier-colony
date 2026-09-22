@@ -1,0 +1,82 @@
+{
+  "name": "frontier-colony",
+  "productName": "Colony Frontier",
+  "version": "0.1.0",
+  "private": true,
+  "description": "外星殖民开荒：2D 俯视角塔防 + 开放大世界探索 + 城镇经营",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "author": {
+    "name": "Colony Frontier Team",
+    "email": "support@example.com"
+  },
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "node tools/dev-server.mjs",
+    "app": "electron .",
+    "start": "electron .",
+    "verify": "node tools/verify.mjs",
+    "verify:all": "node tools/verify.mjs --all",
+    "shots": "electron tools/screenshot.cjs",
+    "icon": "node tools/make-icon.mjs",
+    "shortcut": "node tools/make-shortcut.mjs",
+    "dist": "electron-builder --win --x64",
+    "dist:dir": "electron-builder --win --x64 --dir",
+    "godot:data": "node tools/export-godot-data.mjs",
+    "godot:verify": "node tools/godot-verify.mjs",
+    "godot": "tools/godot-dl/exe/Godot_v4.4.1-stable_win64.exe --path godot"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^26.15.3"
+  },
+  "optionalDependencies": {
+    "steamworks.js": "^0.3.1"
+  },
+  "build": {
+    "appId": "com.colonyfrontier.game",
+    "productName": "Colony Frontier",
+    "copyright": "Copyright © 2026 Colony Frontier Team",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "index.html",
+      "src/**/*",
+      "electron/**/*",
+      "assets/**/*",
+      "!assets/_packs/**/*",
+      "!assets/shots/**/*",
+      "!**/*.md",
+      "!tools/**/*",
+      "!tools/shots/**/*",
+      "!**/*.bak",
+      "!steam_appid.txt",
+      "!assets-src/**/*",
+      "!assets/_x_*/**/*",
+      "!assets/_dl_*.zip"
+    ],
+    "extraResources": [],
+    "win": {
+      "target": [
+        {
+          "target": "dir",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "artifactName": "ColonyFrontier-${version}-${arch}.${ext}",
+      "legalTrademarks": "",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "asar": false,
+    "compression": "maximum",
+    "removePackageScripts": true,
+    "electronDownload": {
+      "mirror": "https://npmmirror.com/mirrors/electron/"
+    }
+  }
+}

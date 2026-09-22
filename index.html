@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>开拓者：殖民地 — 外星开荒</title>
+<link rel="stylesheet" href="src/ui/style.css" />
+</head>
+<body>
+<div id="app">
+  <!-- 游戏画面层 -->
+  <canvas id="game" width="1280" height="720"></canvas>
+
+  <!-- 世界内的浮动提示 / 伤害数字 -->
+  <div id="floaters" class="layer"></div>
+
+  <!-- HUD -->
+  <div id="hud" class="layer">
+    <div id="hud-top-left" class="hud-block">
+      <div id="vitals" class="panel slim"></div>
+    </div>
+
+    <div id="hud-top-center" class="hud-block">
+      <div id="wavebar" class="panel slim"></div>
+    </div>
+
+    <div id="hud-top-right" class="hud-block">
+      <div id="resources" class="panel slim"></div>
+    </div>
+
+    <div id="hud-bottom-left" class="hud-block">
+      <div id="minimap-wrap" class="panel">
+        <canvas id="minimap" width="220" height="220"></canvas>
+        <div id="minimap-label">区域扫描</div>
+      </div>
+    </div>
+
+    <div id="hud-bottom-center" class="hud-block">
+      <div id="hotbar"></div>
+    </div>
+
+    <div id="hud-bottom-right" class="hud-block">
+      <div id="quick-actions"></div>
+      <div id="context-hint" class="hint"></div>
+    </div>
+
+    <div id="compass"></div>
+    <div id="notice-stack"></div>
+
+    <!-- 手柄操作提示（接上手柄才显示） -->
+    <div id="gamepad-bar"></div>
+  </div>
+
+  <!-- 手柄连接状态 -->
+  <div id="gamepad-status"></div>
+
+  <!-- 模态窗口容器 -->
+  <div id="modal-root" class="layer hidden"></div>
+
+  <!-- 主菜单 -->
+  <div id="mainmenu" class="layer menu-screen"></div>
+
+  <!-- 暂停 -->
+  <div id="pause-overlay" class="layer hidden"></div>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

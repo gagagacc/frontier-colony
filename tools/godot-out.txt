@@ -1,0 +1,5 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 616.64 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 5070 Ti Laptop GPU
+
+[godot] 进入游戏 · 种子 frontier-1857 · 世界生成 4551 ms · 图集 107 ms · 图集哈希 1352557544
+[godot] 巢穴 36 · 地标 39 · 崖边签名 4116789997
