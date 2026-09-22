@@ -43,6 +43,10 @@ const COPY = [
   ['tools/make-icon.mjs', 'tools/make-icon.mjs'],
   // 文档
   ['godot/PORT-PLAN.md', 'PORT-PLAN.md'],
+  // ⚠️ README 必须**从主仓库的来源文件**拷进来：
+  //    这个脚本会先清空输出目录，手写在 godot-repo/ 里的 README 会被冲掉
+  //    （踩过一次：推上去的 Godot 仓库没有 README）。
+  ['docs/godot-README.md', 'README.md'],
 ];
 
 // ---------- 不带的重东西（有一份说明在 README 里）----------
