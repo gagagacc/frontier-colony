@@ -61,8 +61,24 @@ const gh = async (path, init = {}) => {
 const me = await gh('/user');
 if (!me.ok) { console.error('❌ token 无效：' + (me.json?.message || me.status)); process.exit(4); }
 const owner = me.json.login;
-const git = (a) => execFileSync('git', a, { cwd: ROOT, encoding: 'utf8' }).trim();
-const files = git(['ls-files']).split('\n').filter(Boolean);
+const git = (a, cwd = ROOT) => execFileSync('git', a, { cwd, encoding: 'utf8' }).trim();
+
+/*
+ * 工作区重组后（开拓者html/ 与 开拓者gobot/ 两个目录，git 根在上层），
+ * 这个脚本要能：
+ *   1. 从**子目录**里跑（自动问 git 仓库根在哪）；
+ *   2. 只推**本项目目录**下的文件，并把前缀剥掉 ——
+ *      这样 GitHub 仓库里仍是「项目在根」，而不是多一层 开拓者html/。
+ */
+const REPO_ROOT = git(['rev-parse', '--show-toplevel']);
+const PREFIX = ROOT === REPO_ROOT ? '' : ROOT.slice(REPO_ROOT.length + 1).replace(/\\/g, '/') + '/';
+if (PREFIX) console.log('▶ 仓库根：' + REPO_ROOT + ' · 只推子目录：' + PREFIX);
+// ⚠️ core.quotepath=false：否则 git 会把中文路径输出成八进制转义（\346\213\223...），
+//    前缀匹配就会一个文件都匹配不到（踩过）
+const files = git(['-c', 'core.quotepath=false', 'ls-files'], REPO_ROOT)
+  .split('\n')
+  .filter((f) => f && (!PREFIX || f.startsWith(PREFIX)))
+  .map((f) => (PREFIX ? f.slice(PREFIX.length) : f));
 const subject = git(['log', '-1', '--pretty=%s']);
 const message = git(['log', '-1', '--pretty=%B']);
 const authorName = git(['log', '-1', '--pretty=%an']);
